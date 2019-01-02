@@ -37,7 +37,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/apim/deployments/apim-service.json",
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/apim-service.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -61,7 +61,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/apim/deployments/apim-product.json",
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/apim-product.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -104,7 +104,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/apim/deployments/apim-group.json",
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/apim-group.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -141,7 +141,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/apim/deployments/apim-named-value.json",
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/apim-named-value.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -174,7 +174,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/apim/deployments/application-insights.json",
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/application-insights.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -192,7 +192,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/apim/deployments/apim-logger.json",
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/apim-logger.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
