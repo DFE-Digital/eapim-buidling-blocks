@@ -1,0 +1,218 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "apiManagementServiceName": {
+            "type": "string"
+        },
+        "publisherEmail": {
+            "type": "string"
+        },
+        "publisherName": {
+            "type": "string"
+        },
+        "apimProductConfiguration": {
+            "type": "array",
+            "defaultValue": []
+        },
+        "apimGroupConfiguration": {
+            "type": "array",
+            "defaultValue": []
+        },
+        "apimNamedValueConfiguration": {
+            "type": "array",
+            "defaultValue": []
+        }
+    },
+    "variables": {
+        "deployProducts": "[greater(length(parameters('apimProductConfiguration')), 0)]",
+        "deployGroups": "[greater(length(parameters('apimGroupConfiguration')), 0)]",
+        "deployNamedValues": "[greater(length(parameters('apimNamedValueConfiguration')), 0)]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "name": "apimService",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/deployments/apim-service.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "apiManagementServiceName": {
+                        "value": "[parameters('apiManagementServiceName')]"
+                    },
+                    "publisherEmail": {
+                        "value": "[parameters('publisherEmail')]"
+                    },
+                    "publisherName": {
+                        "value": "[parameters('publisherName')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "[concat('apimProduct-', copyIndex())]",
+            "type": "Microsoft.Resources/deployments",
+            "condition": "[variables('deployProducts')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/deployments/apim-product.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "apiManagementServiceName": {
+                        "value": "[parameters('apiManagementServiceName')]"
+                    },
+                    "productResourceName": {
+                        "value": "[replace(parameters('apimProductConfiguration')[copyIndex()].displayName, ' ', '')]"
+                    },
+                    "productDisplayName": {
+                        "value": "[parameters('apimProductConfiguration')[copyIndex()].displayName]"
+                    },
+                    "productDescription": {
+                        "value": "[parameters('apimProductConfiguration')[copyIndex()].description]"
+                    },
+                    "productSubscriptionRequired": {
+                        "value": "[parameters('apimProductConfiguration')[copyIndex()].subscriptionRequired]"
+                    },
+                    "productApprovalRequired": {
+                        "value": "[parameters('apimProductConfiguration')[copyIndex()].approvalRequired]"
+                    },
+                    "productState": {
+                        "value": "[parameters('apimProductConfiguration')[copyIndex()].state]"
+                    }
+                }
+            },
+            "copy": {
+                "name": "apimProductCopy",
+                "count": "[if(variables('deployProducts'), length(parameters('apimProductConfiguration')), 1)]"
+            },
+            "dependsOn": [
+                "apimService"
+            ]
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "[concat('apimGroup-', copyIndex())]",
+            "type": "Microsoft.Resources/deployments",
+            "condition": "[variables('deployGroups')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/deployments/apim-group.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "apiManagementServiceName": {
+                        "value": "[parameters('apiManagementServiceName')]"
+                    },
+                    "groupResourceName": {
+                        "value": "[replace(parameters('apimGroupConfiguration')[copyIndex()].displayName, ' ', '')]"
+                    },
+                    "groupDisplayName": {
+                        "value": "[parameters('apimGroupConfiguration')[copyIndex()].displayName]"
+                    },
+                    "groupDescription": {
+                        "value": "[parameters('apimGroupConfiguration')[copyIndex()].description]"
+                    },
+                    "groupType": {
+                        "value": "[parameters('apimGroupConfiguration')[copyIndex()].type]"
+                    }
+                }
+            },
+            "copy": {
+                "name": "apimGroupCopy",
+                "count": "[if(variables('deployGroups'), length(parameters('apimGroupConfiguration')), 1)]"
+            },
+            "dependsOn": [
+                "apimService"
+            ]
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "[concat('apimNamedValue-', copyIndex())]",
+            "type": "Microsoft.Resources/deployments",
+            "condition": "[variables('deployNamedValues')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/deployments/apim-named-value.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "apiManagementServiceName": {
+                        "value": "[parameters('apiManagementServiceName')]"
+                    },
+                    "namedValueName": {
+                        "value": "[parameters('apimNamedValueConfiguration')[copyIndex()].name]"
+                    },
+                    "namedValueValue": {
+                        "value": "[parameters('apimNamedValueConfiguration')[copyIndex()].value]"
+                    },
+                    "namedValueIsSecret": {
+                        "value": "[parameters('apimNamedValueConfiguration')[copyIndex()].isSecret]"
+                    }
+                }
+            },
+            "copy": {
+                "name": "apimNamedValueCopy",
+                "count": "[if(variables('deployNamedValues'), length(parameters('apimNamedValueConfiguration')), 1)]"
+            },
+            "dependsOn": [
+                "apimService"
+            ]
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "loggerAppInsights",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/deployments/application-insights.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "appInsightsName": {
+                        "value": "[parameters('apiManagementServiceName')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "apimLogger",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-building-blocks/master/deployments/apim-logger.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "apiManagementServiceName": {
+                        "value": "[parameters('apiManagementServiceName')]"
+                    },
+                    "loggerName": {
+                        "value": "appInsightsLogger"
+                    },
+                    "loggerType": {
+                        "value": "applicationInsights"
+                    },
+                    "loggerCredentials": {
+                        "value": {
+                            "instrumentationKey": "[reference('loggerAppInsights').outputs.InstrumentationKey.value]"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {}
+}
