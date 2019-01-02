@@ -1,0 +1,61 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "name": "vnet",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/shared/deployments/vnet.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "app-gateway-public-ip",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/shared/deployments/public-ip.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+
+                }
+            },
+            "dependsOn":[
+                "vnet"
+            ]
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "app-gateway",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/shared/deployments/app-gateway.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+
+                }
+            },
+            "dependsOn":[
+                "app-gateway-public-ip",
+                "vnet"
+            ]
+        }
+    ],
+    "outputs": {}
+}
