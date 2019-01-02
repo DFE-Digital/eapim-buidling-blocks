@@ -41,6 +41,30 @@
             "metadata": {
                 "description": "The instance size of this API Management service."
             }
+        },
+        "developerPortalHostName": {
+            "type": "string",
+            "metadata": {
+                "description": "The custom hostname for the developer portal."
+            }
+        },
+        "developerPortalCertificateKeyVaultId": {
+            "type": "string",
+            "metadata": {
+                "description": "The key vault Uri containing the certificate for the developer portal custom hostname"
+            }
+        },
+        "proxyHostName": {
+            "type": "string",
+            "metadata": {
+                "description": "The custom hostname for the api proxy."
+            }
+        },
+        "proxyCertificateKeyVaultId": {
+            "type": "string",
+            "metadata": {
+                "description": "The key vault Uri containing the certificate for the api proxy custom hostname"
+            }
         }
     },
     "variables": {},
@@ -57,7 +81,26 @@
             },
             "properties": {
                 "publisherEmail": "[parameters('publisherEmail')]",
-                "publisherName": "[parameters('publisherName')]"
+                "publisherName": "[parameters('publisherName')]",
+                "hostnameConfigurations": [
+                    {
+                        "type": "Portal",
+                        "hostName": "[parameters('developerPortalHostName')]",
+                        "keyVaultId": "[parameters('developerPortalCertificateKeyVaultId')]",
+                        "defaultSslBinding": true,
+                        "negotiateClientCertificate": false
+                    },
+                    {
+                        "type": "Proxy",
+                        "hostName": "[parameters('proxyHostName')]",
+                        "keyVaultId": "[parameters('proxyCertificateKeyVaultId')]",
+                        "defaultSslBinding": true,
+                        "negotiateClientCertificate": false
+                    }
+                ],
+                "identity": {
+                    "type": "SystemAssigned"
+                }
             }
         }
     ]
