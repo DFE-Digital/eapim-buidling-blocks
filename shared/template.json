@@ -1,7 +1,23 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {},
+    "parameters": {
+      "vNetname": {
+          "type": "string"
+      },
+      "vNetaddressPrefix": {
+          "type": "string"
+      },
+      "subnetName": {
+          "type": "string"
+      },
+      "subnetAddressPrefix": {
+          "type": "string"
+      },
+      "enableDdosProtection": {
+          "type": "bool"
+      }
+  },
     "variables": {},
     "resources": [
         {
@@ -15,7 +31,21 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-
+                    "vNetname": {
+                        "value": "[parameters('vNetname')]"
+                    },
+                    "vNetaddressPrefix": {
+                        "value": "[parameters('vNetaddressPrefix')]"
+                    },
+                    "subnetName": {
+                        "value": "[parameters('subnetName')]"
+                    },
+                    "subnetAddressPrefix": {
+                        "value": "[parameters('subnetAddressPrefix')]"
+                    },
+                    "enableDdosProtection": {
+                        "value": "[parameters('enableDdosProtection')]"
+                    }
                 }
             }
         },
