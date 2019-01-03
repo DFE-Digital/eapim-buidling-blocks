@@ -94,7 +94,7 @@
     "variables": {
         "developerPortalCertificateKeyVaultId": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/secrets/', parameters('developerPortalCertificateName'))]",
         "proxyCertificateKeyVaultId": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/secrets/' ,parameters('proxyCertificateName'))]",
-        "subnetResourceId": "[resourceId(parameters('sharedResourceGroupName'), parameters('sharedVirtualNetworkName'), parameters('subnetName'))]"
+        "subnetResourceId": "[resourceId(parameters('sharedResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('sharedVirtualNetworkName'), parameters('subnetName'))]"
     },
     "resources": [
         {
