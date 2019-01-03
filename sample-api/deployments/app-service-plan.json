@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "appServicePlanName": {
+            "type": "string"
+        },
+        "appServicePlanSku": {
+            "type": "object",
+            "defaultValue": {
+                "name": "S1",
+                "tier": "Standard",
+                "size": "S1",
+                "family": "S",
+                "capacity": 4
+            }
+        },
+        "appServicePlanOS": {
+            "type": "string"
+        },
+        "appServicePlanIsLinux": {
+            "type": "bool"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "name": "AppServicePlan",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "parameters": {
+                    "appServicePlanName": {
+                        "value": "[parameters('appServicePlanName')]"
+                    },
+                    "appServicePlanSku": {
+                        "value": "[parameters('appServicePlanSku')]"
+                    },
+                    "appServicePlanOS": {
+                        "value": "[parameters('appServicePlanOS')]"
+                    },
+                    "appServicePlanIsLinux": {
+                        "value": "[parameters('appServicePlanIsLinux')]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {}
+}

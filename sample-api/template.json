@@ -1,0 +1,77 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "appServiceName": {
+            "type": "string"
+        },
+        "appServicePlanName": {
+            "type": "string"
+        },
+        "appServicePlanRG": {
+            "type": "string"
+        },
+        "appServicePlanSku": {
+            "type": "object"
+        },
+        "appServicePlanOS": {
+            "type": "string"
+        },
+        "appServicePlanIsLinux": {
+            "type": "bool"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "name": "vnet",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/sample-api/deployments/app-service-plan.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "appServicePlanName": {
+                        "value": "[parameters('appServicePlanName')]"
+                    },
+                    "appServicePlanSku": {
+                        "value": "[parameters('appServicePlanSku')]"
+                    },
+                    "appServicePlanOS": {
+                        "value": "[parameters('appServicePlanOS')]"
+                    },
+                    "appServicePlanIsLinux": {
+                        "value": "[parameters('appServicePlanIsLinux')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "app-gateway-public-ip",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/sample-api/deployments/app-service.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "appServiceName": {
+                        "value": "[parameters('appServiceName')]"
+                    },
+                    "appServicePlanName": {
+                        "value": "[parameters('appServicePlanName')]"
+                    },
+                    "appServicePlanRG": {
+                        "value": "[parameters('appServicePlanRG')]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {}
+}
