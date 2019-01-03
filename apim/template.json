@@ -37,6 +37,9 @@
         },
         "proxyCertificateName": {
             "type": "string"
+        },
+        "sharedResourceGroupName": {
+            "type": "string"
         }
     },
     "variables": {
@@ -87,6 +90,7 @@
             "apiVersion": "2017-05-10",
             "name": "keyVaultAccessPolicy",
             "type": "Microsoft.Resources/deployments",
+            "resourceGroup":"[parameters('sharedResourceGroupName')]",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -98,7 +102,7 @@
                         "value": "[parameters('keyVaultName')]"
                     },
                     "serviceIdentityObjectId": {
-                        "value": "reference('apimService').outputs.serviceIdentityPrincipalId.value"
+                        "value": "[reference('apimService').outputs.serviceIdentityPrincipalId.value]"
                     }
                 }
             }
@@ -261,7 +265,11 @@
                         }
                     }
                 }
-            }
+            },
+            "dependsOn":[
+                "apimService"
+
+            ]
         }
     ],
     "outputs": {}
