@@ -60,22 +60,41 @@
                 "description": "The name of the Key Vault."
             }
         },
-        "developerPortalCertificateName":{
+        "developerPortalCertificateName": {
             "type": "string",
             "metadata": {
                 "description": "The name of the developer portal certificate in Key Vault."
             }
         },
-        "proxyCertificateName":{
+        "proxyCertificateName": {
             "type": "string",
             "metadata": {
                 "description": "The name of the developer portal certificate in Key Vault."
+            }
+        },
+        "sharedResourceGroupName":{
+            "type": "string",
+            "metadata": {
+                "description": "The name of the shared infrastructure resource group."
+            }
+        },
+        "sharedVirtualNetworkName":{
+            "type": "string",
+            "metadata": {
+                "description": "The name of the shared infrastructure virtual network."
+            }
+        },
+        "subnetName":{
+            "type": "string",
+            "metadata": {
+                "description": "The name of the apim subnet."
             }
         }
     },
     "variables": {
         "developerPortalCertificateKeyVaultId": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/secrets/', parameters('developerPortalCertificateName'))]",
-        "proxyCertificateKeyVaultId": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/secrets/' ,parameters('proxyCertificateName'))]"
+        "proxyCertificateKeyVaultId": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/secrets/' ,parameters('proxyCertificateName'))]",
+        "subnetResourceId": "[resourceId(parameters('sharedResourceGroupName'), parameters('sharedVirtualNetworkName'), parameters('subnetName'))]"
     },
     "resources": [
         {
@@ -83,7 +102,6 @@
             "name": "[parameters('apiManagementServiceName')]",
             "type": "Microsoft.ApiManagement/service",
             "location": "[resourceGroup().location]",
-            "tags": {},
             "sku": {
                 "name": "[parameters('sku')]",
                 "capacity": "[parameters('skuCount')]"
@@ -96,17 +114,18 @@
                         "type": "Portal",
                         "hostName": "[parameters('developerPortalHostName')]",
                         "keyVaultId": "[variables('developerPortalCertificateKeyVaultId')]",
-                        "defaultSslBinding": true,
-                        "negotiateClientCertificate": false
                     },
                     {
                         "type": "Proxy",
                         "hostName": "[parameters('proxyHostName')]",
                         "keyVaultId": "[variables('proxyCertificateKeyVaultId')]",
-                        "defaultSslBinding": true,
-                        "negotiateClientCertificate": false
+                        "defaultSslBinding": true
                     }
                 ],
+                "virtualNetworkConfiguration": {
+                    "subnetResourceId": "[variables('subnetResourceId')]"
+                },
+                "virtualNetworkType":"Internal",
                 "identity": {
                     "type": "SystemAssigned"
                 }

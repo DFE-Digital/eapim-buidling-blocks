@@ -40,6 +40,12 @@
         },
         "sharedResourceGroupName": {
             "type": "string"
+        },
+        "sharedVirtualNetworkName":{
+            "type": "string"
+        },
+        "subnetName":{
+            "type": "string"
         }
     },
     "variables": {
@@ -82,6 +88,15 @@
                     },
                     "proxyCertificateName": {
                         "value": "[parameters('proxyCertificateName')]"
+                    },
+                    "sharedResourceGroupName": {
+                        "type": "[parameters('sharedResourceGroupName')]"
+                    },
+                    "sharedVirtualNetworkName":{
+                        "type": "[parameters('sharedVirtualNetworkName')]"
+                    },
+                    "subnetName":{
+                        "type": "[parameters('subnetName')]"
                     }
                 }
             }
