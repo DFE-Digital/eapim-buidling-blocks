@@ -90,13 +90,13 @@
                         "value": "[parameters('proxyCertificateName')]"
                     },
                     "sharedResourceGroupName": {
-                        "type": "[parameters('sharedResourceGroupName')]"
+                        "value": "[parameters('sharedResourceGroupName')]"
                     },
                     "sharedVirtualNetworkName":{
-                        "type": "[parameters('sharedVirtualNetworkName')]"
+                        "value": "[parameters('sharedVirtualNetworkName')]"
                     },
                     "subnetName":{
-                        "type": "[parameters('subnetName')]"
+                        "value": "[parameters('subnetName')]"
                     }
                 }
             }
