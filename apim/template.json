@@ -25,6 +25,18 @@
         },
         "keyVaultName": {
             "type": "string"
+        },
+        "developerPortalHostName": {
+            "type": "string"
+        },
+        "developerPortalCertificateName": {
+            "type": "string"
+        },
+        "proxyHostName": {
+            "type": "string"
+        },
+        "proxyCertificateName": {
+            "type": "string"
         }
     },
     "variables": {
@@ -52,6 +64,21 @@
                     },
                     "publisherName": {
                         "value": "[parameters('publisherName')]"
+                    },
+                    "keyVaultName": {
+                        "value": "[parameters('keyVaultName')]"
+                    },
+                    "developerPortalHostName": {
+                        "value": "[parameters('developerPortalHostName')]"
+                    },
+                    "developerPortalCertificateName": {
+                        "value": "[parameters('developerPortalCertificateName')]"
+                    },
+                    "proxyHostName": {
+                        "value": "[parameters('proxyHostName')]"
+                    },
+                    "proxyCertificateName": {
+                        "value": "[parameters('proxyCertificateName')]"
                     }
                 }
             }

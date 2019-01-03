@@ -48,26 +48,35 @@
                 "description": "The custom hostname for the developer portal."
             }
         },
-        "developerPortalCertificateKeyVaultId": {
-            "type": "string",
-            "metadata": {
-                "description": "The key vault Uri containing the certificate for the developer portal custom hostname"
-            }
-        },
         "proxyHostName": {
             "type": "string",
             "metadata": {
                 "description": "The custom hostname for the api proxy."
             }
         },
-        "proxyCertificateKeyVaultId": {
+        "keyVaultName": {
             "type": "string",
             "metadata": {
-                "description": "The key vault Uri containing the certificate for the api proxy custom hostname"
+                "description": "The name of the Key Vault."
+            }
+        },
+        "developerPortalCertificateName":{
+            "type": "string",
+            "metadata": {
+                "description": "The name of the developer portal certificate in Key Vault."
+            }
+        },
+        "proxyCertificateName":{
+            "type": "string",
+            "metadata": {
+                "description": "The name of the developer portal certificate in Key Vault."
             }
         }
     },
-    "variables": {},
+    "variables": {
+        "developerPortalCertificateKeyVaultId": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/secrets/', parameters('developerPortalCertificateName'))]",
+        "proxyCertificateKeyVaultId": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/secrets/' ,parameters('proxyCertificateName'))]"
+    },
     "resources": [
         {
             "apiVersion": "2017-03-01",
@@ -86,14 +95,14 @@
                     {
                         "type": "Portal",
                         "hostName": "[parameters('developerPortalHostName')]",
-                        "keyVaultId": "[parameters('developerPortalCertificateKeyVaultId')]",
+                        "keyVaultId": "[variables('developerPortalCertificateKeyVaultId')]",
                         "defaultSslBinding": true,
                         "negotiateClientCertificate": false
                     },
                     {
                         "type": "Proxy",
                         "hostName": "[parameters('proxyHostName')]",
-                        "keyVaultId": "[parameters('proxyCertificateKeyVaultId')]",
+                        "keyVaultId": "[variables('proxyCertificateKeyVaultId')]",
                         "defaultSslBinding": true,
                         "negotiateClientCertificate": false
                     }
@@ -104,7 +113,6 @@
             }
         }
     ],
-
     "outputs": {
         "serviceIdentityPrincipalId": {
             "type": "string",
