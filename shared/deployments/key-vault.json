@@ -28,10 +28,7 @@
           "type": "array",
           "defaultValue": [
             "list"
-          ],
-          "metadata": {
-            "description": "Permissions to Certificates in the vault. See https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults for possible values."
-          }
+          ]
         },
         "enableVaultForDeployment": {
             "type": "bool",

@@ -26,24 +26,6 @@
         "AccessPolicyObjectId": {
             "type": "string"
         },
-        "keysPermissions": {
-            "type": "array"
-        },
-        "secretsPermissions": {
-            "type": "array"
-        },
-        "certificatePermissions": {
-            "type": "array"
-        },
-        "enableVaultForDeployment": {
-            "type": "bool"
-        },
-        "enableVaultForDiskEncryption": {
-            "type": "bool"
-        },
-        "enabledForTemplateDeployment": {
-            "type": "bool"
-        },
         "publicIpAddressName": {
             "type": "string"
         },
@@ -199,24 +181,6 @@
                     },
                     "AccessPolicyObjectId": {
                         "value": "[parameters('AccessPolicyObjectId')]"
-                    },
-                    "keysPermissions": {
-                        "value": "[parameters('keysPermissions')]"
-                    },
-                    "secretsPermissions": {
-                        "value": "[parameters('secretsPermissions')]"
-                    },
-                    "certificatePermissions": {
-                        "value": "[parameters('certificatePermissions')]"
-                    },
-                    "enableVaultForDeployment": {
-                        "value": "[parameters('enableVaultForDeployment')]"
-                    },
-                    "enableVaultForDiskEncryption": {
-                        "value": "[parameters('enableVaultForDiskEncryption')]"
-                    },
-                    "enabledForTemplateDeployment": {
-                        "value": "[parameters('enabledForTemplateDeployment')]"
                     }
                 }
             }
