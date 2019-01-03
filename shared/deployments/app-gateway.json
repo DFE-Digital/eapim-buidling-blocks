@@ -31,6 +31,18 @@
         },
         "apimPortalHostname": {
             "type": "string"
+        },
+        "apimGatewayCertData": {
+            "type": "securestring"
+        },
+        "apimGatewayCertPassword": {
+            "type": "securestring"
+        },
+        "apimPortalCertData": {
+            "type": "securestring"
+        },
+        "apimPortalCertPassword": {
+            "type": "securestring"
         }
     },
     "variables": {
@@ -71,7 +83,7 @@
                     {
                         "name": "appGatewayFrontendPort",
                         "properties": {
-                            "port": 80
+                            "port": 443
                         }
                     }
                 ],
@@ -97,7 +109,8 @@
                             "probe": {
                                 "id": "[concat(variables('applicationGatewayID'), '/probes/apimGatewayProbe')]"
                             },
-                            "requestTimeout": 180
+                            "requestTimeout": 180,
+                            "hostName": "[parameters('apimGatewayHostname')]"
                         }
                     },
                     {
@@ -109,7 +122,8 @@
                             "probe": {
                                 "id": "[concat(variables('applicationGatewayID'), '/probes/apimPortalProbe')]"
                             },
-                            "requestTimeout": 180
+                            "requestTimeout": 180,
+                            "hostName": "[parameters('apimPortalHostname')]"
                         }
                     }
                 ],
@@ -123,9 +137,12 @@
                             "frontendPort": {
                                 "id": "[concat(variables('applicationGatewayID'), '/frontendPorts/appGatewayFrontendPort')]"
                             },
-                            "protocol": "Http",
+                            "protocol": "Https",
                             "hostName": "[parameters('apimGatewayHostname')]",
-                            "requireServerNameIndication": false
+                            "requireServerNameIndication": true,
+                            "sslCertificate": {
+                                "id": "[concat(variables('applicationGatewayID'), '/sslCertificates/gatewayCert')]"
+                            }
                         }
                     },
                     {
@@ -137,9 +154,12 @@
                             "frontendPort": {
                                 "id": "[concat(variables('applicationGatewayID'), '/frontendPorts/appGatewayFrontendPort')]"
                             },
-                            "protocol": "Http",
+                            "protocol": "Https",
                             "hostName": "[parameters('apimPortalHostname')]",
-                            "requireServerNameIndication": false
+                            "requireServerNameIndication": true,
+                            "sslCertificate": {
+                                "id": "[concat(variables('applicationGatewayID'), '/sslCertificates/gatewayCert')]"
+                            }
                         }
                     }
                 ],
@@ -169,7 +189,7 @@
                 ],
                 "requestRoutingRules": [
                     {
-                        "Name": "rule1",
+                        "Name": "apimGatewayRouting",
                         "properties": {
                             "ruleType": "Basic",
                             "httpListener": {
@@ -184,7 +204,7 @@
                         }
                     },
                     {
-                        "Name": "rule2",
+                        "Name": "apimPortalRouting",
                         "properties": {
                             "ruleType": "Basic",
                             "httpListener": {
@@ -199,7 +219,22 @@
                         }
                     }
                 ],
-                "sslCertificates": [],
+                "sslCertificates": [
+                    {
+                        "name": "gatewayCert",
+                        "properties": {
+                            "data": "[parameters('apimGatewayCertData')]",
+                            "password": "[parameters('apimGatewayCertPassword')]"
+                        }
+                    },
+                    {
+                        "name": "portalCert",
+                        "properties": {
+                            "data": "[parameters('apimPortalCertData')]",
+                            "password": "[parameters('apimPortalCertPassword')]"
+                        }
+                    }
+                ],
                 "webApplicationFirewallConfiguration": {
                     "enabled": true,
                     "firewallMode": "Prevention",
