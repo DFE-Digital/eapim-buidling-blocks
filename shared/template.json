@@ -8,10 +8,34 @@
         "vNetaddressPrefix": {
             "type": "string"
         },
-        "subnetName": {
+        "ag_subnetName": {
             "type": "string"
         },
-        "subnetAddressPrefix": {
+        "ag_subnetAddressPrefix": {
+            "type": "string"
+        },
+        "custeng_subnetName": {
+            "type": "string"
+        },
+        "custeng_subnetAddressPrefix": {
+            "type": "string"
+        },
+        "dc_subnetName": {
+            "type": "string"
+        },
+        "dc_subnetAddressPrefix": {
+            "type": "string"
+        },
+        "ops_subnetName": {
+            "type": "string"
+        },
+        "ops_subnetAddressPrefix": {
+            "type": "string"
+        },
+        "busen_subnetName": {
+            "type": "string"
+        },
+        "busen_subnetAddressPrefix": {
             "type": "string"
         },
         "enableDdosProtection": {
@@ -76,11 +100,35 @@
                     "vNetaddressPrefix": {
                         "value": "[parameters('vNetaddressPrefix')]"
                     },
-                    "subnetName": {
-                        "value": "[parameters('subnetName')]"
+                    "ag_subnetName": {
+                        "value": "[parameters('ag_subnetName')]"
                     },
-                    "subnetAddressPrefix": {
-                        "value": "[parameters('subnetAddressPrefix')]"
+                    "ag_subnetAddressPrefix": {
+                        "value": "[parameters('ag_subnetAddressPrefix')]"
+                    },
+                    "custeng_subnetName": {
+                        "value": "[parameters('custeng_subnetName')]"
+                    },
+                    "custeng_subnetAddressPrefix": {
+                        "value": "[parameters('custeng_subnetAddressPrefix')]"
+                    },
+                    "busen_subnetName": {
+                        "value": "[parameters('busen_subnetName')]"
+                    },
+                    "busen_subnetAddressPrefix": {
+                        "value": "[parameters('busen_subnetAddressPrefix')]"
+                    },
+                    "dc_subnetName": {
+                        "value": "[parameters('dc_subnetName')]"
+                    },
+                    "dc_subnetAddressPrefix": {
+                        "value": "[parameters('dc_subnetAddressPrefix')]"
+                    },
+                    "ops_subnetName": {
+                        "value": "[parameters('ops_subnetName')]"
+                    },
+                    "ops_subnetAddressPrefix": {
+                        "value": "[parameters('ops_subnetAddressPrefix')]"
                     },
                     "enableDdosProtection": {
                         "value": "[parameters('enableDdosProtection')]"
