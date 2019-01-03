@@ -29,6 +29,9 @@
         "publicIpAddressName": {
             "type": "string"
         },
+        "applicationGatewayName": {
+            "type": "string"
+        },
         "appGatewayMinCapacity": {
             "type": "int"
         },
@@ -120,7 +123,7 @@
                 },
                 "parameters": {
                     "applicationGatewayName": {
-                        "value": ""
+                        "value": "[parameters('applicationGatewayName')]"
                     },
                     "applicationGatewaySku": {
                         "value": "WAF_v2"
