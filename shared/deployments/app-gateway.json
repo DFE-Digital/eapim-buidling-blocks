@@ -158,7 +158,7 @@
                             "hostName": "[parameters('apimPortalHostname')]",
                             "requireServerNameIndication": true,
                             "sslCertificate": {
-                                "id": "[concat(variables('applicationGatewayID'), '/sslCertificates/gatewayCert')]"
+                                "id": "[concat(variables('applicationGatewayID'), '/sslCertificates/portalCert')]"
                             }
                         }
                     }
