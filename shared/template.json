@@ -2,21 +2,48 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "vNetname": {
-          "type": "string"
-      },
-      "vNetaddressPrefix": {
-          "type": "string"
-      },
-      "subnetName": {
-          "type": "string"
-      },
-      "subnetAddressPrefix": {
-          "type": "string"
-      },
-      "enableDdosProtection": {
-          "type": "bool"
-      }
+        "vNetname": {
+            "type": "string"
+        },
+        "vNetaddressPrefix": {
+            "type": "string"
+        },
+        "subnetName": {
+            "type": "string"
+        },
+        "subnetAddressPrefix": {
+            "type": "string"
+        },
+        "enableDdosProtection": {
+            "type": "bool"
+        },
+        "keyVaultName": {
+        "type": "string"
+        },
+        "keyVault_sku": {
+        "type": "string"
+        },
+        "AccessPolicyObjectId": {
+            "type": "string"
+        },
+        "keysPermissions": {
+        "type": "array"
+        },
+        "secretsPermissions": {
+        "type": "array"
+        },
+        "certificatePermissions": {
+        "type": "array"
+        },
+        "enableVaultForDeployment": {
+            "type": "bool"
+        },
+        "enableVaultForDiskEncryption": {
+            "type": "bool"
+        },
+        "enabledForTemplateDeployment": {
+            "type": "bool"
+        }
   },
     "variables": {},
     "resources": [
@@ -85,6 +112,47 @@
                 "app-gateway-public-ip",
                 "vnet"
             ]
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "vnet",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/shared/deployments/key-vault.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "keyVaultName": {
+                        "value": "[parameters('keyVaultName')]"
+                    },
+                    "keyVault_sku": {
+                        "value": "[parameters('keyVault_sku')]"
+                    },
+                    "AccessPolicyObjectId": {
+                        "value": "[parameters('AccessPolicyObjectId')]"
+                    },
+                    "keysPermissions": {
+                        "value": "[parameters('keysPermissions')]"
+                    },
+                    "secretsPermissions": {
+                        "value": "[parameters('secretsPermissions')]"
+                    },
+                    "certificatePermissions": {
+                        "value": "[parameters('certificatePermissions')]"
+                    },
+                    "enableVaultForDeployment": {
+                        "value": "[parameters('enableVaultForDeployment')]"
+                    },
+                    "enableVaultForDiskEncryption": {
+                        "value": "[parameters('enableVaultForDiskEncryption')]"
+                    },
+                    "enabledForTemplateDeployment": {
+                        "value": "[parameters('enabledForTemplateDeployment')]"
+                    }
+                }
+            }
         }
     ],
     "outputs": {}

@@ -1,0 +1,81 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "type": "string"
+        },
+        "keyVault_sku": {
+          "type": "string",
+          "defaultValue": "Standard"
+        },
+        "AccessPolicyObjectId": {
+            "type": "string"
+        },
+        "keysPermissions": {
+          "type": "array",
+          "defaultValue": [
+            "list"
+          ]
+        },
+        "secretsPermissions": {
+          "type": "array",
+          "defaultValue": [
+            "list"
+          ]
+        },
+        "certificatePermissions": {
+          "type": "array",
+          "defaultValue": [
+            "list"
+          ],
+          "metadata": {
+            "description": "Permissions to Certificates in the vault. See https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults for possible values."
+          }
+        },
+        "enableVaultForDeployment": {
+            "type": "bool",
+            "defaultValue": false
+        },
+        "enableVaultForDiskEncryption": {
+            "type": "bool",
+            "defaultValue": false
+        },
+        "enabledForTemplateDeployment": {
+            "type": "bool",
+            "defaultValue": true
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.KeyVault/vaults",
+            "name": "[parameters('keyVaultName')]",
+            "apiVersion": "2015-06-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "mode": "Incremental",
+                "enabledForDeployment": "[parameters('enableVaultForDeployment')]",
+                "enabledForDiskEncryption": "[parameters('enableVaultForDiskEncryption')]",
+                "enabledForTemplateDeployment": "[parameters('enabledForTemplateDeployment')]",
+                "tenantId": "[subscription().tenantId]",
+                "sku": {
+                    "name": "[parameters('keyVault_sku')]",
+                    "family": "A"
+                },
+                "accessPolicies": [
+                    {
+                      "tenantId": "[subscription().tenantId]",
+                      "objectId": "[parameters('AccessPolicyObjectId')]",
+                      "permissions": {
+                        "keys": "[parameters('keysPermissions')]",
+                        "secrets": "[parameters('secretsPermissions')]",
+                        "certificates": "[parameters('certificatePermissions')]"
+                      }
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": {}
+}
