@@ -1,45 +1,51 @@
 {
-  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-      "vNetname": {
-          "type": "string"
-      },
-      "vNetaddressPrefix": {
-          "type": "string"
-      },
-      "subnetName": {
-          "type": "string"
-      },
-      "subnetAddressPrefix": {
-          "type": "string"
-      },
-      "enableDdosProtection": {
-          "type": "bool"
-      }
-  },
-  "resources": [
-      {
-          "apiVersion": "2018-08-01",
-          "name": "[parameters('vNetname')]",
-          "type": "Microsoft.Network/virtualNetworks",
-          "location": "[resourceGroup().location]",
-          "properties": {
-              "addressSpace": {
-                  "addressPrefixes": [
-                      "[parameters('vNetaddressPrefix')]"
-                  ]
-              },
-              "subnets": [
-                  {
-                      "name": "[parameters('subnetName')]",
-                      "properties": {
-                          "addressPrefix": "[parameters('subnetAddressPrefix')]"
-                      }
-                  }
-              ],
-              "enableDdosProtection": "[parameters('enableDdosProtection')]"
-          }
-      }
-  ]
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vNetname": {
+            "type": "string"
+        },
+        "vNetaddressPrefix": {
+            "type": "string"
+        },
+        "subnetName": {
+            "type": "string"
+        },
+        "subnetAddressPrefix": {
+            "type": "string"
+        },
+        "enableDdosProtection": {
+            "type": "bool"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2018-08-01",
+            "name": "[parameters('vNetname')]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('vNetaddressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetAddressPrefix')]"
+                        }
+                    }
+                ],
+                "enableDdosProtection": "[parameters('enableDdosProtection')]"
+            }
+        }
+    ],
+    "outputs": {
+        "appGatewaySubnetResourceId": {
+            "type": "string",
+            "value": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetname'), parameters('subnetName'))]"
+        }
+    }
 }

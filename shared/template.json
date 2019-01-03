@@ -18,22 +18,22 @@
             "type": "bool"
         },
         "keyVaultName": {
-        "type": "string"
+            "type": "string"
         },
         "keyVault_sku": {
-        "type": "string"
+            "type": "string"
         },
         "AccessPolicyObjectId": {
             "type": "string"
         },
         "keysPermissions": {
-        "type": "array"
+            "type": "array"
         },
         "secretsPermissions": {
-        "type": "array"
+            "type": "array"
         },
         "certificatePermissions": {
-        "type": "array"
+            "type": "array"
         },
         "enableVaultForDeployment": {
             "type": "bool"
@@ -43,8 +43,35 @@
         },
         "enabledForTemplateDeployment": {
             "type": "bool"
+        },
+        "publicIpAddressName": {
+            "type": "string"
+        },
+        "appGatewayMinCapacity": {
+            "type": "int"
+        },
+        "apimBackendAddress": {
+            "type": "string"
+        },
+        "apimGatewayHostname": {
+            "type": "string"
+        },
+        "apimPortalHostname": {
+            "type": "string"
+        },
+        "apimGatewayCertData": {
+            "type": "securestring"
+        },
+        "apimGatewayCertPassword": {
+            "type": "securestring"
+        },
+        "apimPortalCertData": {
+            "type": "securestring"
+        },
+        "apimPortalCertPassword": {
+            "type": "securestring"
         }
-  },
+    },
     "variables": {},
     "resources": [
         {
@@ -87,12 +114,17 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-
+                    "publicIpAddressName": {
+                        "value": "[parameters('publicIpAddressName')]"
+                    },
+                    "publicIpAddressSku": {
+                        "value": "Standard"
+                    },
+                    "publicIpAddressAllocationMethod": {
+                        "value": "Static"
+                    }
                 }
-            },
-            "dependsOn":[
-                "vnet"
-            ]
+            }
         },
         {
             "apiVersion": "2017-05-10",
@@ -105,10 +137,45 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-
+                    "applicationGatewayName": {
+                        "value": ""
+                    },
+                    "applicationGatewaySku": {
+                        "value": "WAF_v2"
+                    },
+                    "applicationGatewayMinCapacity": {
+                        "value": "[parameters('appGatewayMinCapacity')]"
+                    },
+                    "subnetResourceId": {
+                        "value": "[reference('vnet').outputs.appGatewaySubnetResourceId.value]"
+                    },
+                    "publicIpResourceId": {
+                        "value": "[reference('app-gateway-public-ip').outputs.publicIpResourceId.value]"
+                    },
+                    "apimBackendAddress": {
+                        "value": "[parameters('apimBackendAddress')]"
+                    },
+                    "apimGatewayHostname": {
+                        "value": "[parameters('apimGatewayHostname')]"
+                    },
+                    "apimPortalHostname": {
+                        "value": "[parameters('apimPortalHostname')]"
+                    },
+                    "apimGatewayCertData": {
+                        "value": "[parameters('apimGatewayCertData')]"
+                    },
+                    "apimGatewayCertPassword": {
+                        "value": "[parameters('apimGatewayCertPassword')]"
+                    },
+                    "apimPortalCertData": {
+                        "value": "[parameters('apimPortalCertData')]"
+                    },
+                    "apimPortalCertPassword": {
+                        "value": "[parameters('apimPortalCertPassword')]"
+                    }
                 }
             },
-            "dependsOn":[
+            "dependsOn": [
                 "app-gateway-public-ip",
                 "vnet"
             ]
