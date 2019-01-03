@@ -1,0 +1,41 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the keyvault associated with the APIM insance"
+            }
+        },
+        "serviceIdentityObjectId": {
+            "type": "string",
+            "metadata": {
+                "description": "The object ID of the managed service identity created by APIM"
+            }
+        }
+    },
+    "variables": {
+        "secretPermissions": [
+            "get"
+        ]
+    },
+    "resources": [
+        {
+            "type": "Microsoft.KeyVault/vaults/accessPolicies",
+            "name": "[concat(parameters('keyVaultName'), '/add')]",
+            "apiVersion": "2018-02-14",
+            "properties": {
+                "accessPolicies": [
+                    {
+                        "tenantId": "[subscription().tenantId]",
+                        "objectId": "[parameters('serviceIdentityObjectId')]",
+                        "permissions": {
+                            "secrets": "[variables('secretPermissions')]"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

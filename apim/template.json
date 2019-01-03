@@ -22,6 +22,9 @@
         "apimNamedValueConfiguration": {
             "type": "array",
             "defaultValue": []
+        },
+        "keyVaultName": {
+            "type": "string"
         }
     },
     "variables": {
@@ -49,6 +52,26 @@
                     },
                     "publisherName": {
                         "value": "[parameters('publisherName')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "keyVaultAccessPolicy",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/apim-service.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "keyVaultName": {
+                        "value": "[parameters('keyVaultName')]"
+                    },
+                    "serviceIdentityObjectId": {
+                        "value": "reference('apimService').outputs.serviceIdentityPrincipalId.value"
                     }
                 }
             }
