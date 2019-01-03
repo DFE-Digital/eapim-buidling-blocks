@@ -45,16 +45,16 @@
             "type": "string"
         },
         "apimGatewayCertData": {
-            "type": "securestring"
+            "type": "string"
         },
         "apimGatewayCertPassword": {
-            "type": "securestring"
+            "type": "string"
         },
         "apimPortalCertData": {
-            "type": "securestring"
+            "type": "string"
         },
         "apimPortalCertPassword": {
-            "type": "securestring"
+            "type": "string"
         }
     },
     "variables": {},
