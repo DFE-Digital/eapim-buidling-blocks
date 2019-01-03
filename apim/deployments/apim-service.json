@@ -113,7 +113,7 @@
                     {
                         "type": "Portal",
                         "hostName": "[parameters('developerPortalHostName')]",
-                        "keyVaultId": "[variables('developerPortalCertificateKeyVaultId')]",
+                        "keyVaultId": "[variables('developerPortalCertificateKeyVaultId')]"
                     },
                     {
                         "type": "Proxy",
@@ -125,10 +125,10 @@
                 "virtualNetworkConfiguration": {
                     "subnetResourceId": "[variables('subnetResourceId')]"
                 },
-                "virtualNetworkType":"Internal",
-                "identity": {
-                    "type": "SystemAssigned"
-                }
+                "virtualNetworkType":"Internal"
+            },
+            "identity": {
+                "type": "SystemAssigned"
             }
         }
     ],
