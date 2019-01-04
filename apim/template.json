@@ -127,6 +127,18 @@
                     },
                     "subnetName": {
                         "value": "[parameters('apimSubnetName')]"
+                    },
+                    "apimGatewayCertData": {
+                        "value": "[parameters('apimGatewayCertData')]"
+                    },
+                    "apimGatewayCertPassword": {
+                        "value": "[parameters('apimGatewayCertPassword')]"
+                    },
+                    "apimPortalCertData": {
+                        "value": "[parameters('apimPortalCertData')]"
+                    },
+                    "apimPortalCertPassword": {
+                        "value": "[parameters('apimPortalCertPassword')]"
                     }
                 }
             }
