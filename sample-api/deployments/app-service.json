@@ -12,16 +12,22 @@
             "type": "string"
         }
     },
-    "variables": {},
+    "variables": {
+        "appServicePlanId": "[resourceId(parameters('appServicePlanRG'), 'Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+    },
     "resources": [
         {
-            "apiVersion": "2017-05-10",
+            "type": "Microsoft.Web/sites",
             "name": "[parameters('appServiceName')]",
-            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2016-08-01",
+            "location": "[resourceGroup().location]",
             "properties": {
-                "mode": "Incremental",
-                "appServicePlanName": "[parameters('appServicePlanName')]",
-                "appServicePlanRG": "[parameters('appServicePlanRG')]"
+                "clientAffinityEnabled": false,
+                "serverFarmId": "[variables('appServicePlanId')]",
+                "httpsOnly": true,
+                "siteConfig": {
+                    "alwaysOn": false,
+                }
             }
         }
     ]
