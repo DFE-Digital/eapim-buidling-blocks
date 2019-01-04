@@ -23,19 +23,10 @@
             "type": "array",
             "defaultValue": []
         },
-        "keyVaultName": {
-            "type": "string"
-        },
         "developerPortalHostName": {
             "type": "string"
         },
-        "developerPortalCertificateName": {
-            "type": "string"
-        },
         "proxyHostName": {
-            "type": "string"
-        },
-        "proxyCertificateName": {
             "type": "string"
         },
         "sharedResourceGroupName": {
@@ -95,20 +86,11 @@
                     "publisherName": {
                         "value": "[parameters('publisherName')]"
                     },
-                    "keyVaultName": {
-                        "value": "[parameters('keyVaultName')]"
-                    },
                     "developerPortalHostName": {
                         "value": "[parameters('developerPortalHostName')]"
                     },
-                    "developerPortalCertificateName": {
-                        "value": "[parameters('developerPortalCertificateName')]"
-                    },
                     "proxyHostName": {
                         "value": "[parameters('proxyHostName')]"
-                    },
-                    "proxyCertificateName": {
-                        "value": "[parameters('proxyCertificateName')]"
                     },
                     "sharedResourceGroupName": {
                         "value": "[parameters('sharedResourceGroupName')]"
@@ -124,27 +106,6 @@
                     },
                     "apimCertPassword": {
                         "value": "[parameters('apimCertPassword')]"
-                    }
-                }
-            }
-        },
-        {
-            "apiVersion": "2017-05-10",
-            "name": "keyVaultAccessPolicy",
-            "type": "Microsoft.Resources/deployments",
-            "resourceGroup": "[parameters('sharedResourceGroupName')]",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/key-vault-access-policy.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "keyVaultName": {
-                        "value": "[parameters('keyVaultName')]"
-                    },
-                    "serviceIdentityObjectId": {
-                        "value": "[reference('apimService').outputs.serviceIdentityPrincipalId.value]"
                     }
                 }
             }
