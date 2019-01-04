@@ -126,10 +126,5 @@
             }
         }
     ],
-    "outputs": {
-        "appGatewaySubnetResourceId": {
-            "type": "string",
-            "value": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetname'), parameters('busen_ag_subnetName'))]"
-        }
-    }
+    "outputs": {}
 }
