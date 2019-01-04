@@ -353,7 +353,7 @@
                         "value": "[parameters('applicationGatewayName')]"
                     },
                     "applicationGatewaySku": {
-                        "value": "WAF"
+                        "value": "WAF_Medium"
                     },
                     "applicationGatewayCapacity": {
                         "value": "[parameters('appGatewayCapacity')]"
