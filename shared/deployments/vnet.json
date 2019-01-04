@@ -8,10 +8,28 @@
         "vNetaddressPrefix": {
             "type": "string"
         },
-        "ag_subnetName": {
+        "busen_ag_subnetName": {
             "type": "string"
         },
-        "ag_subnetAddressPrefix": {
+        "busen_ag_subnetAddressPrefix": {
+            "type": "string"
+        },
+        "custeng_ag_subnetName": {
+            "type": "string"
+        },
+        "custeng_ag_subnetAddressPrefix": {
+            "type": "string"
+        },
+        "dc_ag_subnetName": {
+            "type": "string"
+        },
+        "dc_ag_subnetAddressPrefix": {
+            "type": "string"
+        },
+        "ops_ag_subnetName": {
+            "type": "string"
+        },
+        "ops_ag_subnetAddressPrefix": {
             "type": "string"
         },
         "custeng_subnetName": {
@@ -56,9 +74,9 @@
                 },
                 "subnets": [
                     {
-                        "name": "[parameters('ag_subnetName')]",
+                        "name": "[parameters('busen_ag_subnetName')]",
                         "properties": {
-                            "addressPrefix": "[parameters('ag_subnetAddressPrefix')]"
+                            "addressPrefix": "[parameters('busen_ag_subnetAddressPrefix')]"
                         }
                     },
                     {
@@ -68,15 +86,33 @@
                         }
                     },
                     {
-                        "name": "[parameters('dc_subnetName')]",
+                        "name": "[parameters('custeng_ag_subnetName')]",
                         "properties": {
-                            "addressPrefix": "[parameters('dc_subnetAddressPrefix')]"
+                            "addressPrefix": "[parameters('custeng_ag_subnetAddressPrefix')]"
                         }
                     },
                     {
                         "name": "[parameters('custeng_subnetName')]",
                         "properties": {
                             "addressPrefix": "[parameters('custeng_subnetAddressPrefix')]"
+                        }
+                    },
+                    {
+                        "name": "[parameters('dc_ag_subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('dc_ag_subnetAddressPrefix')]"
+                        }
+                    },
+                    {
+                        "name": "[parameters('dc_subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('dc_subnetAddressPrefix')]"
+                        }
+                    },
+                    {
+                        "name": "[parameters('ops_ag_subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('ops_ag_subnetAddressPrefix')]"
                         }
                     },
                     {
@@ -90,10 +126,5 @@
             }
         }
     ],
-    "outputs": {
-        "appGatewaySubnetResourceId": {
-            "type": "string",
-            "value": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetname'), parameters('ag_subnetName'))]"
-        }
-    }
+    "outputs": {}
 }

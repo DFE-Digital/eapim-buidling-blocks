@@ -31,7 +31,10 @@
             },
             "location": "[resourceGroup().location]",
             "properties": {
-                "publicIPAllocationMethod": "[parameters('publicIpAddressAllocationMethod')]"
+                "publicIPAllocationMethod": "[parameters('publicIpAddressAllocationMethod')]",
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('publicIpAddressName')]"
+                }
             }
         }
     ],

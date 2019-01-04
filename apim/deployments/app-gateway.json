@@ -9,13 +9,11 @@
             "type": "string",
             "allowedValues": [
                 "WAF_Medium",
-                "WAF_Large",
-                "WAF_v2"
+                "WAF_Large"
             ]
         },
-        "applicationGatewayMinCapacity": {
-            "type": "int",
-            "minValue": 2
+        "applicationGatewayCapacity": {
+            "type": "int"
         },
         "subnetResourceId": {
             "type": "string"
@@ -43,6 +41,12 @@
         },
         "apimPortalCertPassword": {
             "type": "securestring"
+        },
+        "apimGatewayAuthCertData": {
+            "type": "string"
+        },
+        "apimPortalAuthCertData": {
+            "type": "string"
         }
     },
     "variables": {
@@ -57,7 +61,8 @@
             "properties": {
                 "sku": {
                     "name": "[parameters('applicationGatewaySku')]",
-                    "tier": "[if(equals(parameters('applicationGatewaySku'), 'WAF_v2'), 'WAF_v2', 'WAF')]"
+                    "tier": "WAF",
+                    "capacity": "[parameters('applicationGatewayCapacity')]"
                 },
                 "gatewayIPConfigurations": [
                     {
@@ -110,7 +115,12 @@
                                 "id": "[concat(variables('applicationGatewayID'), '/probes/apimGatewayProbe')]"
                             },
                             "requestTimeout": 180,
-                            "hostName": "[parameters('apimGatewayHostname')]"
+                            "hostName": "[parameters('apimGatewayHostname')]",
+                            "authenticationCertificates": [
+                                {
+                                    "id": "[concat(variables('applicationGatewayID'), '/authenticationCertificates/apimGatewayBackendCert')]"
+                                }
+                            ]
                         }
                     },
                     {
@@ -123,7 +133,12 @@
                                 "id": "[concat(variables('applicationGatewayID'), '/probes/apimPortalProbe')]"
                             },
                             "requestTimeout": 180,
-                            "hostName": "[parameters('apimPortalHostname')]"
+                            "hostName": "[parameters('apimPortalHostname')]",
+                            "authenticationCertificates": [
+                                {
+                                    "id": "[concat(variables('applicationGatewayID'), '/authenticationCertificates/apimPortalBackendCert')]"
+                                }
+                            ]
                         }
                     }
                 ],
@@ -235,14 +250,25 @@
                         }
                     }
                 ],
+                "authenticationCertificates": [
+                    {
+                        "name": "apimGatewayBackendCert",
+                        "properties": {
+                            "data": "[parameters('apimGatewayAuthCertData')]"
+                        }
+                    },
+                    {
+                        "name": "apimPortalBackendCert",
+                        "properties": {
+                            "data": "[parameters('apimPortalAuthCertData')]"
+                        }
+                    }
+                ],
                 "webApplicationFirewallConfiguration": {
                     "enabled": true,
                     "firewallMode": "Prevention",
                     "ruleSetType": "OWASP",
                     "ruleSetVersion": "3.0"
-                },
-                "autoscaleConfiguration": {
-                    "minCapacity": "[parameters('applicationGatewayMinCapacity')]"
                 }
             }
         }
