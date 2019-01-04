@@ -20,17 +20,9 @@
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
-                "appServiceName": {
-                    "value": "[parameters('appServiceName')]"
-                },
-                "appServicePlanName": {
-                    "value": "[parameters('appServicePlanName')]"
-                },
-                "appServicePlanRG": {
-                    "value": "[parameters('appServicePlanRG')]"
-                }
-
-             }
+                "appServicePlanName": "[parameters('appServicePlanName')]",
+                "appServicePlanRG": "[parameters('appServicePlanRG')]"
+            }
         }
     ]
 }

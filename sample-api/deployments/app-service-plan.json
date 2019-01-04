@@ -26,24 +26,14 @@
     "resources": [
         {
             "apiVersion": "2017-05-10",
-            "name": "AppServicePlan",
+            "name": "[parameters('appServicePlanName')]",
             "type": "Microsoft.Resources/deployments",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "mode": "Incremental",
-                "parameters": {
-                    "appServicePlanName": {
-                        "value": "[parameters('appServicePlanName')]"
-                    },
-                    "appServicePlanSku": {
-                        "value": "[parameters('appServicePlanSku')]"
-                    },
-                    "appServicePlanOS": {
-                        "value": "[parameters('appServicePlanOS')]"
-                    },
-                    "appServicePlanIsLinux": {
-                        "value": "[parameters('appServicePlanIsLinux')]"
-                    }
-                }
+                "appServicePlanSku": "[parameters('appServicePlanSku')]",
+                "appServicePlanOS": "[parameters('appServicePlanOS')]",
+                "appServicePlanIsLinux": "[parameters('appServicePlanIsLinux')]"
             }
         }
     ],
