@@ -124,9 +124,6 @@
                     },
                     "apimCertPassword": {
                         "value": "[parameters('apimCertPassword')]"
-                    },
-                    "apimAuthCertData": {
-                        "value": "[parameters('apimAuthCertData')]"
                     }
                 }
             }
