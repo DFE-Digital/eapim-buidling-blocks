@@ -8,10 +8,10 @@
         "vNetaddressPrefix": {
             "type": "string"
         },
-        "buseng_ag_subnetName": {
+        "busen_ag_subnetName": {
             "type": "string"
         },
-        "buseng_ag_subnetAddressPrefix": {
+        "busen_ag_subnetAddressPrefix": {
             "type": "string"
         },
         "custeng_ag_subnetName": {
@@ -88,11 +88,11 @@
                     "vNetaddressPrefix": {
                         "value": "[parameters('vNetaddressPrefix')]"
                     },
-                    "buseng_ag_subnetName": {
-                        "value": "[parameters('buseng_ag_subnetName')]"
+                    "busen_ag_subnetName": {
+                        "value": "[parameters('busen_ag_subnetName')]"
                     },
-                    "buseng_ag_subnetAddressPrefix": {
-                        "value": "[parameters('buseng_ag_subnetAddressPrefix')]"
+                    "busen_ag_subnetAddressPrefix": {
+                        "value": "[parameters('busen_ag_subnetAddressPrefix')]"
                     },
                     "busen_subnetName": {
                         "value": "[parameters('busen_subnetName')]"
