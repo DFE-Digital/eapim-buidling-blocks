@@ -29,6 +29,9 @@
         "proxyHostName": {
             "type": "string"
         },
+        "managementHostName": {
+            "type": "string"
+        },
         "sharedResourceGroupName": {
             "type": "string"
         },
@@ -91,6 +94,9 @@
                     },
                     "proxyHostName": {
                         "value": "[parameters('proxyHostName')]"
+                    },
+                    "managementHostName": {
+                        "value": "[parameters('managementHostName')]"
                     },
                     "sharedResourceGroupName": {
                         "value": "[parameters('sharedResourceGroupName')]"
