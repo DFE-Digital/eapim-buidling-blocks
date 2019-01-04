@@ -30,22 +30,13 @@
         "apimPortalHostname": {
             "type": "string"
         },
-        "apimGatewayCertData": {
+        "apimCertData": {
             "type": "securestring"
         },
-        "apimGatewayCertPassword": {
+        "apimCertPassword": {
             "type": "securestring"
         },
-        "apimPortalCertData": {
-            "type": "securestring"
-        },
-        "apimPortalCertPassword": {
-            "type": "securestring"
-        },
-        "apimGatewayAuthCertData": {
-            "type": "string"
-        },
-        "apimPortalAuthCertData": {
+        "apimAuthCertData": {
             "type": "string"
         }
     },
@@ -118,7 +109,7 @@
                             "hostName": "[parameters('apimGatewayHostname')]",
                             "authenticationCertificates": [
                                 {
-                                    "id": "[concat(variables('applicationGatewayID'), '/authenticationCertificates/apimGatewayBackendCert')]"
+                                    "id": "[concat(variables('applicationGatewayID'), '/authenticationCertificates/appGatewayBackendCert')]"
                                 }
                             ]
                         }
@@ -136,7 +127,7 @@
                             "hostName": "[parameters('apimPortalHostname')]",
                             "authenticationCertificates": [
                                 {
-                                    "id": "[concat(variables('applicationGatewayID'), '/authenticationCertificates/apimPortalBackendCert')]"
+                                    "id": "[concat(variables('applicationGatewayID'), '/authenticationCertificates/appGatewayBackendCert')]"
                                 }
                             ]
                         }
@@ -156,7 +147,7 @@
                             "hostName": "[parameters('apimGatewayHostname')]",
                             "requireServerNameIndication": true,
                             "sslCertificate": {
-                                "id": "[concat(variables('applicationGatewayID'), '/sslCertificates/gatewayCert')]"
+                                "id": "[concat(variables('applicationGatewayID'), '/sslCertificates/apimCert')]"
                             }
                         }
                     },
@@ -173,7 +164,7 @@
                             "hostName": "[parameters('apimPortalHostname')]",
                             "requireServerNameIndication": true,
                             "sslCertificate": {
-                                "id": "[concat(variables('applicationGatewayID'), '/sslCertificates/portalCert')]"
+                                "id": "[concat(variables('applicationGatewayID'), '/sslCertificates/apimCert')]"
                             }
                         }
                     }
@@ -236,31 +227,18 @@
                 ],
                 "sslCertificates": [
                     {
-                        "name": "gatewayCert",
+                        "name": "apimCert",
                         "properties": {
-                            "data": "[parameters('apimGatewayCertData')]",
-                            "password": "[parameters('apimGatewayCertPassword')]"
-                        }
-                    },
-                    {
-                        "name": "portalCert",
-                        "properties": {
-                            "data": "[parameters('apimPortalCertData')]",
-                            "password": "[parameters('apimPortalCertPassword')]"
+                            "data": "[parameters('apimCertData')]",
+                            "password": "[parameters('apimCertPassword')]"
                         }
                     }
                 ],
                 "authenticationCertificates": [
                     {
-                        "name": "apimGatewayBackendCert",
+                        "name": "appGatewayBackendCert",
                         "properties": {
-                            "data": "[parameters('apimGatewayAuthCertData')]"
-                        }
-                    },
-                    {
-                        "name": "apimPortalBackendCert",
-                        "properties": {
-                            "data": "[parameters('apimPortalAuthCertData')]"
+                            "data": "[parameters('apimAuthCertData')]"
                         }
                     }
                 ],

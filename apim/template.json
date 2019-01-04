@@ -59,22 +59,13 @@
         "appGatewayCapacity": {
             "type": "int"
         },
-        "apimGatewayCertData": {
+        "apimCertData": {
             "type": "string"
         },
-        "apimGatewayCertPassword": {
+        "apimCertPassword": {
             "type": "string"
         },
-        "apimPortalCertData": {
-            "type": "string"
-        },
-        "apimPortalCertPassword": {
-            "type": "string"
-        },
-        "apimGatewayAuthCertData": {
-            "type": "string"
-        },
-        "apimPortalAuthCertData": {
+        "apimAuthCertData": {
             "type": "string"
         }
     },
@@ -128,17 +119,14 @@
                     "subnetName": {
                         "value": "[parameters('apimSubnetName')]"
                     },
-                    "apimGatewayCertData": {
-                        "value": "[parameters('apimGatewayCertData')]"
+                    "apimCertData": {
+                        "value": "[parameters('apimCertData')]"
                     },
-                    "apimGatewayCertPassword": {
-                        "value": "[parameters('apimGatewayCertPassword')]"
+                    "apimCertPassword": {
+                        "value": "[parameters('apimCertPassword')]"
                     },
-                    "apimPortalCertData": {
-                        "value": "[parameters('apimPortalCertData')]"
-                    },
-                    "apimPortalCertPassword": {
-                        "value": "[parameters('apimPortalCertPassword')]"
+                    "apimAuthCertData": {
+                        "value": "[parameters('apimAuthCertData')]"
                     }
                 }
             }
@@ -385,23 +373,14 @@
                     "apimPortalHostname": {
                         "value": "[parameters('developerPortalHostName')]"
                     },
-                    "apimGatewayCertData": {
-                        "value": "[parameters('apimGatewayCertData')]"
+                    "apimCertData": {
+                        "value": "[parameters('apimCertData')]"
                     },
-                    "apimGatewayCertPassword": {
-                        "value": "[parameters('apimGatewayCertPassword')]"
+                    "apimCertPassword": {
+                        "value": "[parameters('apimCertPassword')]"
                     },
-                    "apimPortalCertData": {
-                        "value": "[parameters('apimPortalCertData')]"
-                    },
-                    "apimPortalCertPassword": {
-                        "value": "[parameters('apimPortalCertPassword')]"
-                    },
-                    "apimGatewayAuthCertData": {
-                        "value": "[parameters('apimGatewayAuthCertData')]"
-                    },
-                    "apimPortalAuthCertData": {
-                        "value": "[parameters('apimPortalAuthCertData')]"
+                    "apimAuthCertData": {
+                        "value": "[parameters('apimAuthCertData')]"
                     }
                 }
             },
