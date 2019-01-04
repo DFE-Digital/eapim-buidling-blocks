@@ -49,36 +49,6 @@
         },
         "AccessPolicyObjectId": {
             "type": "string"
-        },
-        "publicIpAddressName": {
-            "type": "string"
-        },
-        "applicationGatewayName": {
-            "type": "string"
-        },
-        "appGatewayMinCapacity": {
-            "type": "int"
-        },
-        "apimBackendAddress": {
-            "type": "string"
-        },
-        "apimGatewayHostname": {
-            "type": "string"
-        },
-        "apimPortalHostname": {
-            "type": "string"
-        },
-        "apimGatewayCertData": {
-            "type": "string"
-        },
-        "apimGatewayCertPassword": {
-            "type": "string"
-        },
-        "apimPortalCertData": {
-            "type": "string"
-        },
-        "apimPortalCertPassword": {
-            "type": "string"
         }
     },
     "variables": {},
@@ -135,83 +105,6 @@
                     }
                 }
             }
-        },
-        {
-            "apiVersion": "2017-05-10",
-            "name": "app-gateway-public-ip",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/shared/deployments/public-ip.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "publicIpAddressName": {
-                        "value": "[parameters('publicIpAddressName')]"
-                    },
-                    "publicIpAddressSku": {
-                        "value": "Standard"
-                    },
-                    "publicIpAddressAllocationMethod": {
-                        "value": "Static"
-                    }
-                }
-            }
-        },
-        {
-            "apiVersion": "2017-05-10",
-            "name": "app-gateway",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/shared/deployments/app-gateway.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "applicationGatewayName": {
-                        "value": "[parameters('applicationGatewayName')]"
-                    },
-                    "applicationGatewaySku": {
-                        "value": "WAF_v2"
-                    },
-                    "applicationGatewayMinCapacity": {
-                        "value": "[parameters('appGatewayMinCapacity')]"
-                    },
-                    "subnetResourceId": {
-                        "value": "[reference('vnet').outputs.appGatewaySubnetResourceId.value]"
-                    },
-                    "publicIpResourceId": {
-                        "value": "[reference('app-gateway-public-ip').outputs.publicIpResourceId.value]"
-                    },
-                    "apimBackendAddress": {
-                        "value": "[parameters('apimBackendAddress')]"
-                    },
-                    "apimGatewayHostname": {
-                        "value": "[parameters('apimGatewayHostname')]"
-                    },
-                    "apimPortalHostname": {
-                        "value": "[parameters('apimPortalHostname')]"
-                    },
-                    "apimGatewayCertData": {
-                        "value": "[parameters('apimGatewayCertData')]"
-                    },
-                    "apimGatewayCertPassword": {
-                        "value": "[parameters('apimGatewayCertPassword')]"
-                    },
-                    "apimPortalCertData": {
-                        "value": "[parameters('apimPortalCertData')]"
-                    },
-                    "apimPortalCertPassword": {
-                        "value": "[parameters('apimPortalCertPassword')]"
-                    }
-                }
-            },
-            "dependsOn": [
-                "app-gateway-public-ip",
-                "vnet"
-            ]
         },
         {
             "apiVersion": "2017-05-10",

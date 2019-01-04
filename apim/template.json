@@ -41,10 +41,40 @@
         "sharedResourceGroupName": {
             "type": "string"
         },
-        "sharedVirtualNetworkName":{
+        "sharedVirtualNetworkName": {
             "type": "string"
         },
-        "subnetName":{
+        "apimSubnetName": {
+            "type": "string"
+        },
+        "appGatewaySubnetName": {
+            "type": "string"
+        },
+        "publicIpAddressName": {
+            "type": "string"
+        },
+        "applicationGatewayName": {
+            "type": "string"
+        },
+        "appGatewayCapacity": {
+            "type": "int"
+        },
+        "apimGatewayCertData": {
+            "type": "string"
+        },
+        "apimGatewayCertPassword": {
+            "type": "string"
+        },
+        "apimPortalCertData": {
+            "type": "string"
+        },
+        "apimPortalCertPassword": {
+            "type": "string"
+        },
+        "apimGatewayAuthCertData": {
+            "type": "string"
+        },
+        "apimPortalAuthCertData": {
             "type": "string"
         }
     },
@@ -92,11 +122,11 @@
                     "sharedResourceGroupName": {
                         "value": "[parameters('sharedResourceGroupName')]"
                     },
-                    "sharedVirtualNetworkName":{
+                    "sharedVirtualNetworkName": {
                         "value": "[parameters('sharedVirtualNetworkName')]"
                     },
-                    "subnetName":{
-                        "value": "[parameters('subnetName')]"
+                    "subnetName": {
+                        "value": "[parameters('apimSubnetName')]"
                     }
                 }
             }
@@ -105,7 +135,7 @@
             "apiVersion": "2017-05-10",
             "name": "keyVaultAccessPolicy",
             "type": "Microsoft.Resources/deployments",
-            "resourceGroup":"[parameters('sharedResourceGroupName')]",
+            "resourceGroup": "[parameters('sharedResourceGroupName')]",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -281,9 +311,91 @@
                     }
                 }
             },
-            "dependsOn":[
+            "dependsOn": [
                 "apimService"
-
+            ]
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "app-gateway-public-ip",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/public-ip.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "publicIpAddressName": {
+                        "value": "[parameters('publicIpAddressName')]"
+                    },
+                    "publicIpAddressSku": {
+                        "value": "Basic"
+                    },
+                    "publicIpAddressAllocationMethod": {
+                        "value": "Dynamic"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "app-gateway",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/app-gateway.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "applicationGatewayName": {
+                        "value": "[parameters('applicationGatewayName')]"
+                    },
+                    "applicationGatewaySku": {
+                        "value": "WAF"
+                    },
+                    "applicationGatewayCapacity": {
+                        "value": "[parameters('appGatewayCapacity')]"
+                    },
+                    "subnetResourceId": {
+                        "value": "[resourceId(parameters('sharedResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('sharedVirtualNetworkName'), parameters('appGatewaySubnetName'))]"
+                    },
+                    "publicIpResourceId": {
+                        "value": "[reference('app-gateway-public-ip').outputs.publicIpResourceId.value]"
+                    },
+                    "apimBackendAddress": {
+                        "value": "[reference('apimService').outputs.apimServicePrivateIPAddress.value]"
+                    },
+                    "apimGatewayHostname": {
+                        "value": "[parameters('proxyHostName')]"
+                    },
+                    "apimPortalHostname": {
+                        "value": "[parameters('developerPortalHostName')]"
+                    },
+                    "apimGatewayCertData": {
+                        "value": "[parameters('apimGatewayCertData')]"
+                    },
+                    "apimGatewayCertPassword": {
+                        "value": "[parameters('apimGatewayCertPassword')]"
+                    },
+                    "apimPortalCertData": {
+                        "value": "[parameters('apimPortalCertData')]"
+                    },
+                    "apimPortalCertPassword": {
+                        "value": "[parameters('apimPortalCertPassword')]"
+                    },
+                    "apimGatewayAuthCertData": {
+                        "value": "[parameters('apimGatewayAuthCertData')]"
+                    },
+                    "apimPortalAuthCertData": {
+                        "value": "[parameters('apimPortalAuthCertData')]"
+                    }
+                }
+            },
+            "dependsOn": [
+                "app-gateway-public-ip",
+                "vnet"
             ]
         }
     ],
