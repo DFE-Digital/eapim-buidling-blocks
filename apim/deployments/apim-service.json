@@ -90,28 +90,16 @@
                 "description": "The name of the apim subnet."
             }
         },
-        "apimGatewayCertData": {
+        "apimCertData": {
             "type": "string",
             "metadata": {
-                "description": "Certificate for the proxy endpoint."
+                "description": "Certificate for the portal and proxy endpoints."
             }
         },
-        "apimGatewayCertPassword": {
+        "apimCertPassword": {
             "type": "string",
             "metadata": {
-                "description": "The password for the proxy endpoint certificate."
-            }
-        },
-        "apimPortalCertData": {
-            "type": "string",
-            "metadata": {
-                "description": "Certificate for the portal endpoint."
-            }
-        },
-        "apimPortalCertPassword": {
-            "type": "string",
-            "metadata": {
-                "description": "The password for the portal endpoint certificate."
+                "description": "The password for the portal and proxy endpoint certificate."
             }
         }
     },
@@ -137,14 +125,14 @@
                     {
                         "type": "Portal",
                         "hostName": "[parameters('developerPortalHostName')]",
-                        "encodedCertificate": "[parameters('apimPortalCertData')]",
-                        "certificatePassword": "[parameters('apimPortalCertPassword')]"
+                        "encodedCertificate": "[parameters('apimCertData')]",
+                        "certificatePassword": "[parameters('apimCertPassword')]"
                     },
                     {
                         "type": "Proxy",
                         "hostName": "[parameters('proxyHostName')]",
-                        "encodedCertificate": "[parameters('apimGatewayCertData')]",
-                        "certificatePassword": "[parameters('apimGatewayCertPassword')]",
+                        "encodedCertificate": "[parameters('apimCertData')]",
+                        "certificatePassword": "[parameters('apimCertPassword')]",
                         "defaultSslBinding": true
                     }
                 ],
