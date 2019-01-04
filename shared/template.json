@@ -8,10 +8,28 @@
         "vNetaddressPrefix": {
             "type": "string"
         },
-        "ag_subnetName": {
+        "buseng_ag_subnetName": {
             "type": "string"
         },
-        "ag_subnetAddressPrefix": {
+        "buseng_ag_subnetAddressPrefix": {
+            "type": "string"
+        },
+        "custeng_ag_subnetName": {
+            "type": "string"
+        },
+        "custeng_ag_subnetAddressPrefix": {
+            "type": "string"
+        },
+        "dc_ag_subnetName": {
+            "type": "string"
+        },
+        "dc_ag_subnetAddressPrefix": {
+            "type": "string"
+        },
+        "ops_ag_subnetName": {
+            "type": "string"
+        },
+        "ops_ag_subnetAddressPrefix": {
             "type": "string"
         },
         "custeng_subnetName": {
@@ -100,17 +118,11 @@
                     "vNetaddressPrefix": {
                         "value": "[parameters('vNetaddressPrefix')]"
                     },
-                    "ag_subnetName": {
-                        "value": "[parameters('ag_subnetName')]"
+                    "buseng_ag_subnetName": {
+                        "value": "[parameters('buseng_ag_subnetName')]"
                     },
-                    "ag_subnetAddressPrefix": {
-                        "value": "[parameters('ag_subnetAddressPrefix')]"
-                    },
-                    "custeng_subnetName": {
-                        "value": "[parameters('custeng_subnetName')]"
-                    },
-                    "custeng_subnetAddressPrefix": {
-                        "value": "[parameters('custeng_subnetAddressPrefix')]"
+                    "buseng_ag_subnetAddressPrefix": {
+                        "value": "[parameters('buseng_ag_subnetAddressPrefix')]"
                     },
                     "busen_subnetName": {
                         "value": "[parameters('busen_subnetName')]"
@@ -118,11 +130,35 @@
                     "busen_subnetAddressPrefix": {
                         "value": "[parameters('busen_subnetAddressPrefix')]"
                     },
+                    "custeng_ag_subnetName": {
+                        "value": "[parameters('custeng_ag_subnetName')]"
+                    },
+                    "custeng_ag_subnetAddressPrefix": {
+                        "value": "[parameters('custeng_ag_subnetAddressPrefix')]"
+                    },
+                    "custeng_subnetName": {
+                        "value": "[parameters('custeng_subnetName')]"
+                    },
+                    "custeng_subnetAddressPrefix": {
+                        "value": "[parameters('custeng_subnetAddressPrefix')]"
+                    },
+                    "dc_ag_subnetName": {
+                        "value": "[parameters('dc_ag_subnetName')]"
+                    },
+                    "dc_ag_subnetAddressPrefix": {
+                        "value": "[parameters('dc_ag_subnetAddressPrefix')]"
+                    },
                     "dc_subnetName": {
                         "value": "[parameters('dc_subnetName')]"
                     },
                     "dc_subnetAddressPrefix": {
                         "value": "[parameters('dc_subnetAddressPrefix')]"
+                    },
+                    "ops_ag_subnetName": {
+                        "value": "[parameters('ops_ag_subnetName')]"
+                    },
+                    "ops_ag_subnetAddressPrefix": {
+                        "value": "[parameters('ops_ag_subnetAddressPrefix')]"
                     },
                     "ops_subnetName": {
                         "value": "[parameters('ops_subnetName')]"
