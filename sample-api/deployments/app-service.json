@@ -20,22 +20,17 @@
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service.json",
-                    "contentVersion": "1.0.0.0"
+                "appServiceName": {
+                    "value": "[parameters('appServiceName')]"
                 },
-                "parameters": {
-                    "appServiceName": {
-                        "value": "[parameters('appServiceName')]"
-                    },
-                    "appServicePlanName": {
-                        "value": "[parameters('appServicePlanName')]"
-                    },
-                    "appServicePlanRG": {
-                        "value": "[parameters('appServicePlanRG')]"
-                    }
+                "appServicePlanName": {
+                    "value": "[parameters('appServicePlanName')]"
+                },
+                "appServicePlanRG": {
+                    "value": "[parameters('appServicePlanRG')]"
                 }
-            }
+
+             }
         }
     ]
 }
