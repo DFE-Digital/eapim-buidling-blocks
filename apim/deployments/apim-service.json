@@ -72,22 +72,46 @@
                 "description": "The name of the developer portal certificate in Key Vault."
             }
         },
-        "sharedResourceGroupName":{
+        "sharedResourceGroupName": {
             "type": "string",
             "metadata": {
                 "description": "The name of the shared infrastructure resource group."
             }
         },
-        "sharedVirtualNetworkName":{
+        "sharedVirtualNetworkName": {
             "type": "string",
             "metadata": {
                 "description": "The name of the shared infrastructure virtual network."
             }
         },
-        "subnetName":{
+        "subnetName": {
             "type": "string",
             "metadata": {
                 "description": "The name of the apim subnet."
+            }
+        },
+        "apimGatewayCertData": {
+            "type": "string",
+            "metadata": {
+                "description": "Certificate for the proxy endpoint."
+            }
+        },
+        "apimGatewayCertPassword": {
+            "type": "string",
+            "metadata": {
+                "description": "The password for the proxy endpoint certificate."
+            }
+        },
+        "apimPortalCertData": {
+            "type": "string",
+            "metadata": {
+                "description": "Certificate for the portal endpoint."
+            }
+        },
+        "apimPortalCertPassword": {
+            "type": "string",
+            "metadata": {
+                "description": "The password for the portal endpoint certificate."
             }
         }
     },
@@ -113,19 +137,21 @@
                     {
                         "type": "Portal",
                         "hostName": "[parameters('developerPortalHostName')]",
-                        "keyVaultId": "[variables('developerPortalCertificateKeyVaultId')]"
+                        "encodedCertificate": "[parameters('apimPortalCertData')]",
+                        "certificatePassword": "[parameters('apimPortalCertPassword')]"
                     },
                     {
                         "type": "Proxy",
                         "hostName": "[parameters('proxyHostName')]",
-                        "keyVaultId": "[variables('proxyCertificateKeyVaultId')]",
+                        "encodedCertificate": "[parameters('apimGatewayCertData')]",
+                        "certificatePassword": "[parameters('apimGatewayCertPassword')]",
                         "defaultSslBinding": true
                     }
                 ],
                 "virtualNetworkConfiguration": {
                     "subnetResourceId": "[variables('subnetResourceId')]"
                 },
-                "virtualNetworkType":"Internal"
+                "virtualNetworkType": "Internal"
             },
             "identity": {
                 "type": "SystemAssigned"
