@@ -56,6 +56,9 @@
         "applicationGatewayName": {
             "type": "string"
         },
+        "trafficManagerProfileName": {
+            "type": "string"
+        },   
         "appGatewayCapacity": {
             "type": "int"
         },
@@ -380,6 +383,32 @@
                         "value": "[parameters('apimAuthCertData')]"
                     }
                 }
+            },
+            "dependsOn": [
+                "app-gateway-public-ip"
+            ]
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "traffic-manager",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/traffic-manager.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "PublicEndPoint1ResourceId": {
+                        "value": "[reference('app-gateway-public-ip').outputs.publicIpResourceId.value]"
+                    },
+                    "PublicEndPoint1Name": {
+                        "value": "[parameters('publicIpAddressName')]"
+                    },
+                    "trafficManagerProfileName": {
+                        "value": "[parameters('trafficManagerProfileName')]"
+                    }               
+                  }
             },
             "dependsOn": [
                 "app-gateway-public-ip"
