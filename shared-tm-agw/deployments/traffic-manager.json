@@ -3,13 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "trafficManagerProfileName": {
-             "type": "String"
+             "type": "string"
       },
       "PublicEndPoint1ResourceId": {
-        "type": "String"
+        "type": "string"
         },
         "PublicEndPoint1Name": {
-            "type": "String"
+            "type": "string"
         }       
     },
     "variables": {},

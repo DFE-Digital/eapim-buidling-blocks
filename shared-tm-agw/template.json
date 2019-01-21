@@ -1,0 +1,49 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "trafficManagerProfileName": {
+        "type": "string"
+      },
+      "PublicEndPoint1IPAddressName": {
+        "type": "string"
+      },
+      "PublicEndPoint1SubscriptionId": {
+        "type": "string"
+      },
+      "PublicEndPoint1ResourceGroupName": {
+        "type": "string"
+      },
+      "PublicEndPoint1PIPName": {
+        "type": "string"
+      }
+    },
+    "variables": {},
+    "resources": [
+  
+      {
+        "apiVersion": "2017-05-10",
+        "name": "traffic-manager",
+        "type": "Microsoft.Resources/deployments",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/traffic-manager.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "PublicEndPoint1ResourceId": {
+              "value": "[resourceId(parameters('PublicEndPoint1SubscriptionId'),parameters('PublicEndPoint1ResourceGroupName'), 'Microsoft.Network/publicIPAddresses', parameters('PublicEndPoint1PIPName'))]"
+            },
+            "PublicEndPoint1Name": {
+              "value": "[parameters('PublicEndPoint1IPAddressName')]"
+            },
+            "trafficManagerProfileName": {
+              "value": "[parameters('trafficManagerProfileName')]"
+            }
+          }
+        } 
+      }
+    ],
+    "outputs": {}
+  }
