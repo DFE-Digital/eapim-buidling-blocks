@@ -28,7 +28,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/traffic-manager.json",
+            "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/shared-tm-agw/deployments/traffic-manager.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
