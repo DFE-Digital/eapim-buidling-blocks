@@ -65,12 +65,6 @@
     "trafficManagerEndPoints": {
       "type": "array",
       "defaultValue": []
-    },
-    "publicIpResourceId": {
-      "type": "string"
-    },
-    "apimBackendAddress": {
-      "type": "string"
     }
   },
   "variables": {},
