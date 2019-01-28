@@ -21,9 +21,6 @@
           "appGatewaypublicIpAddressName": {
             "type": "string"
           },
-          "SharedResourceGroupName": {
-            "type": "string"
-          },
           "KeyVaultName": {
             "type": "string"
           },
@@ -37,11 +34,11 @@
     "variables": {
            "applicationGatewayID": "[resourceId('Microsoft.Network/applicationGateways', parameters('applicationGatewayName'))]",
            "appGatewaySubnetResourceId": {
-            "value": "[resourceId(parameters('SharedResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('appGatewayVirtualNetworkName'), parameters('appGatewaySubnetName'))]"
+            "value": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('appGatewayVirtualNetworkName'), parameters('appGatewaySubnetName'))]"
             },    
                   
             "appGatewayPublicIPResourceId": {
-             "value": "[resourceId(parameters('SharedResourceGroupName'), 'Microsoft.Network/publicIPAddresses', parameters('appGatewaypublicIpAddressName'))]"
+             "value": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('appGatewaypublicIpAddressName'))]"
             }
     },
     "resources": [
