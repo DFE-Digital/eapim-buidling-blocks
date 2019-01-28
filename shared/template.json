@@ -66,6 +66,7 @@
       "type": "array",
       "defaultValue": []
     }
+
   },
   "variables": {},
   "resources": [
@@ -185,18 +186,26 @@
           "applicationGatewaySku": {
             "value": "WAF_Medium"
           },
-          "applicationGatewayCapacity": {
+          "appGatewayCapacity": {
             "value": "[parameters('appGatewayCapacity')]"
+          },
+
+          "appGatewaySubnetName": {
+            "value": "[parameters('shared_ag_subnetName')]"
+          },
+          "appGatewayVirtualNetworkName": {
+            "value": "[parameters('vNetname')]"
+          },
+          "keyVaultName": {
+            "value": "[parameters('keyVaultName')]"
           },
           "subnetResourceId": {
             "value": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetname'), parameters('shared_ag_subnetName'))]"
           },
-          "publicIpResourceId": {
-            "value": "[reference('app-gateway-public-ip').outputs.publicIpResourceId.value]"
-          },
-          "apimBackendAddress": {
-            "value": "192.0.0.1"
+          "appGatewaypublicIpAddressName": {
+            "value": "[parameters('publicIpAddressName')]"
           }
+
         }
       },
       "dependsOn": [
