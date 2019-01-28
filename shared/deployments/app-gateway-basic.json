@@ -69,7 +69,7 @@
                     "name": "appGatewayFrontendIP",
                     "properties": {
                         "publicIPAddress": {
-                            "id": "[resourceId(parameters('SharedResourceGroupName'), 'Microsoft.Network/publicIPAddresses', parameters('appGatewaypublicIpAddressName'))]"
+                            "id": "['Microsoft.Network/publicIPAddresses', parameters('appGatewaypublicIpAddressName'))]"
                         }
                     }
                 }
