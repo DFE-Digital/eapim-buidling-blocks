@@ -65,10 +65,6 @@
     "trafficManagerEndPoints": {
       "type": "array",
       "defaultValue": []
-    }
-    ,
-    "subnetResourceId": {
-      "type": "string"
     },
     "publicIpResourceId": {
       "type": "string"
