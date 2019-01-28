@@ -68,13 +68,13 @@
     }
     ,
     "subnetResourceId": {
-      "value": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetname'), parameters('shared_ag_subnetName'))]"
+      "type": "string"
     },
     "publicIpResourceId": {
-      "value": "[reference('app-gateway-public-ip').outputs.publicIpResourceId.value]"
+      "type": "string"
     },
     "apimBackendAddress": {
-      "value": "192.0.0.1"
+      "type": "string"
     }
   },
   "variables": {},
