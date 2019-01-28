@@ -8,30 +8,13 @@
         "vNetaddressPrefix": {
             "type": "string"
         },
-        "busen_ag_subnetName": {
+        "shared_ag_subnetName": {
             "type": "string"
         },
-        "busen_ag_subnetAddressPrefix": {
+        "shared_ag_subnetAddressPrefix": {
             "type": "string"
-        },
-        "custeng_ag_subnetName": {
-            "type": "string"
-        },
-        "custeng_ag_subnetAddressPrefix": {
-            "type": "string"
-        },
-        "dc_ag_subnetName": {
-            "type": "string"
-        },
-        "dc_ag_subnetAddressPrefix": {
-            "type": "string"
-        },
-        "ops_ag_subnetName": {
-            "type": "string"
-        },
-        "ops_ag_subnetAddressPrefix": {
-            "type": "string"
-        },
+        }
+        ,
         "custeng_subnetName": {
             "type": "string"
         },
@@ -74,21 +57,15 @@
                 },
                 "subnets": [
                     {
-                        "name": "[parameters('busen_ag_subnetName')]",
-                        "properties": {
-                            "addressPrefix": "[parameters('busen_ag_subnetAddressPrefix')]"
-                        }
-                    },
-                    {
                         "name": "[parameters('busen_subnetName')]",
                         "properties": {
                             "addressPrefix": "[parameters('busen_subnetAddressPrefix')]"
                         }
                     },
                     {
-                        "name": "[parameters('custeng_ag_subnetName')]",
+                        "name": "[parameters('shared_ag_subnetName')]",
                         "properties": {
-                            "addressPrefix": "[parameters('custeng_ag_subnetAddressPrefix')]"
+                            "addressPrefix": "[parameters('shared_ag_subnetAddressPrefix')]"
                         }
                     },
                     {
@@ -98,21 +75,9 @@
                         }
                     },
                     {
-                        "name": "[parameters('dc_ag_subnetName')]",
-                        "properties": {
-                            "addressPrefix": "[parameters('dc_ag_subnetAddressPrefix')]"
-                        }
-                    },
-                    {
                         "name": "[parameters('dc_subnetName')]",
                         "properties": {
                             "addressPrefix": "[parameters('dc_subnetAddressPrefix')]"
-                        }
-                    },
-                    {
-                        "name": "[parameters('ops_ag_subnetName')]",
-                        "properties": {
-                            "addressPrefix": "[parameters('ops_ag_subnetAddressPrefix')]"
                         }
                     },
                     {
