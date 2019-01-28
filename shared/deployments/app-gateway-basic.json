@@ -21,9 +21,6 @@
           "appGatewaypublicIpAddressName": {
             "type": "string"
           },
-          "appGatewaySkuName": {
-            "type": "string"
-          },
           "SharedResourceGroupName": {
             "type": "string"
           },
