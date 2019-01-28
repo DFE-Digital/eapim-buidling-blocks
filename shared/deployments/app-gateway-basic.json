@@ -35,11 +35,7 @@
           }, 
           "subnetResourceId": {
             "type": "string"
-        },         
-          "apimBackEnds": {
-            "type": "array",
-            "defaultValue": []
-          }
+        }
     },
     "variables": {
            "applicationGatewayID": "[resourceId('Microsoft.Network/applicationGateways', parameters('applicationGatewayName'))]",
