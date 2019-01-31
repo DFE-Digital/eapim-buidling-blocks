@@ -18,7 +18,7 @@ Remove-AzureRmApiManagementApi -Context $ApiMgmtContext -ApiId $apiId -erroracti
 # setting this in base policy through an environment variable rather than in a 'backend'
 #New-AzureRmApiManagementBackend -Context $ApiMgmtContext -Url $apiUrl -Protocol http -Title $apiName -SkipCertificateChainValidation $true
 
-Import-AzureRmApiManagementApi -Context $ApiMgmtContext -SpecificationFormat "Swagger" -ApiId $apiId -SpecificationPath "$swaggerFilePath" -Path $apiPath
+Import-AzureRmApiManagementApi -Context $ApiMgmtContext -SpecificationFormat "Swagger" -ApiId $apiId -SpecificationPath $swaggerFilePath -Path $apiPath
 
 <#ADD API TO PRODUCT#>
 Add-AzureRmApiManagementApiToProduct -Context $ApiMgmtContext -ProductId $productID -ApiId $apiId 
