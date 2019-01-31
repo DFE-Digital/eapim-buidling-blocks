@@ -4,7 +4,7 @@ Param(
 [string] $apiUrl,
 [string] $apiName,
 [string] $apiId,
-[string] $IRISProductID
+[string] $ProductID
 )
 $DebugPreference="Continue"
 
@@ -19,7 +19,7 @@ New-AzureRmApiManagementBackend -Context $ApiMgmtContext -Url $apiUrl -Protocol 
 $api = New-AzureRmApiManagementApi -Context $ApiMgmtContext -Name $apiName -ServiceUrl "$apiUrl" -ApiId $apiId  -Protocols @("http", "https") -Path "$apiName"   
 
 <#ADD API TO PRODUCT#>
-Add-AzureRmApiManagementApiToProduct -Context $ApiMgmtContext -ProductId $IRISProductID -ApiId $api.ApiId
+Add-AzureRmApiManagementApiToProduct -Context $ApiMgmtContext -ProductId $ProductID -ApiId $api.ApiId
 
 }
 
