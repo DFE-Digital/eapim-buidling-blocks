@@ -50,7 +50,7 @@
   <message name="syncSoapTestDataResponse">
     <part name="parameters" element="mx:ResponseElement" />
   </message>
-  <service name="EAPIM SOAP Sample">
+  <service name="EAPIM_SOAP_Sample">
     <port name="EAPIMSoapTestInterfaceSOAP11Port" binding="mxws:EAPIMSoapTestInterfaceSOAP11Binding">
       <soap:address location="https://eapimtest.free.beeceptor.com" />
     </port>
