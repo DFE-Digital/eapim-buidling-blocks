@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/sowww.platform.education.gov.ukap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mx="http://www.platform.education.gov.uk/EAPIM" xmlns:mxws="http://www.platform.education.gov.uk/EAPIM/wsdl/EAPIMSoapTestInterface" targetNamespace="http://www.platform.education.gov.uk/EAPIM/wsdl/EAPIMSoapTestInterface" name="EAPIMSoapTestInterface">
+  <!--null-->
+  <types>
+    <xsd:schema xmlns="http://www.platform.education.gov.uk/EAPIM" elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="http://www.platform.education.gov.uk/EAPIM">
+      <xsd:complexType name="NewSoapTestRequestType">
+        <xsd:sequence>
+          
+          <xsd:element minOccurs="1" maxOccurs="1" name="Data" type="xsd:string"/>
+ 
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ErrorDetailsType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="errorCode" type="xsd:string"/>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="errorComment" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="NewSoapTestResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="SuccessInd" type="xsd:boolean"/>
+          <xsd:element minOccurs="0" maxOccurs="1" name="ErrorDetails" type="ErrorDetailsType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="RequestElement" type="NewSoapTestRequestType"/>
+      <xsd:element name="ResponseElement" nillable="true" type="NewSoapTestResponseType"/>
+    </xsd:schema>
+  </types>
+  <portType name="EAPIMSoapTestInterfacePortType">
+    <operation name="NewSoapTestData">
+      <input message="mxws:syncSoapTestDataRequest" />
+      <output message="mxws:syncSoapTestDataResponse" />
+    </operation>
+  </portType>
+  <binding name="EAPIMSoapTestInterfaceSOAP11Binding" type="mxws:EAPIMSoapTestInterfacePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="NewSoapTestData">
+      <soap:operation soapAction="urn:processSoapTestData" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <message name="syncSoapTestDataRequest">
+    <part name="parameters" element="mx:RequestElement" />
+  </message>
+  <message name="syncSoapTestDataResponse">
+    <part name="parameters" element="mx:ResponseElement" />
+  </message>
+  <service name="EAPIM SOAP Sample">
+    <port name="EAPIMSoapTestInterfaceSOAP11Port" binding="mxws:EAPIMSoapTestInterfaceSOAP11Binding">
+      <soap:address location="https://eapimtest.free.beeceptor.com" />
+    </port>
+  </service>
+</definitions>
+
