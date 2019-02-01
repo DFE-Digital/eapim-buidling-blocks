@@ -8,6 +8,10 @@ Param(
 )
 $DebugPreference="Continue"
 
+if (!(Test-Path $swaggerFilePath)) {
+    Write-Output "swagger file does not exist on the location"
+  }
+
 $ApiMgmtContext = New-AzureRmApiManagementContext -ResourceGroupName "$apiManagementRg" -ServiceName "$apiManagementName"
 
 Write-verbose "$ApiMgmtContext" -verbose
