@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "trafficManagerProfileName": {
+      "type": "string"
+    },
+    "EndPoints": {
+      "type": "array",
+      "defaultValue": []
+    } 
+
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Network/trafficManagerProfiles",
+      "name": "[parameters('trafficManagerProfileName')]",
+      "apiVersion": "2018-04-01",
+      "location": "global",
+      "tags": {},
+      "scale": null,
+      "properties": {
+        "profileStatus": "Enabled",
+        "trafficRoutingMethod": "Performance",
+        "dnsConfig": {
+          "relativeName": "[parameters('trafficManagerProfileName')]",
+          "ttl": 60
+        },
+        "monitorConfig": {
+          "profileMonitorStatus": null,
+          "protocol": "HTTP",
+          "port": 80,
+          "path": "/",
+          "intervalInSeconds": 30,
+          "toleratedNumberOfFailures": 3,
+          "timeoutInSeconds": 10
+        },
+        "trafficViewEnrollmentStatus": "Disabled",
+        "maxReturn": 0
+      }
+    }
+    ,
+    {
+      "apiVersion": "2018-04-01",
+      "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
+      "dependsOn": [
+        "[parameters('trafficManagerProfileName')]"
+      ],
+      "location": "global",
+      "name": "[concat(concat(parameters('trafficManagerProfileName'), '/Endpoint'),parameters('EndPoints')[copyIndex()].PublicEndPointPIPName)]",
+      "copy": {
+        "name": "endpointloop",
+        "count": "[length(parameters('EndPoints'))]"
+      },
+      "properties": {
+        "targetResourceId": "[resourceId(parameters('EndPoints')[copyIndex()].PublicEndPointSubscriptionId,parameters('EndPoints')[copyIndex()].PublicEndPointResourceGroupName, 'Microsoft.Network/publicIPAddresses', parameters('EndPoints')[copyIndex()].PublicEndPointPIPName)]",
+        "endpointStatus": "Enabled"
+      }
+    }    
+  ]
+}
