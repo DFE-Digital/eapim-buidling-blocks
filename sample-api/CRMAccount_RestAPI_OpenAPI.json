@@ -30,7 +30,7 @@
     }
   ],
   "paths": {
-    "/api/data/v9.1/Accounts": {
+    "/api/data/v9.1/accounts": {
       "get": {
         "description": "Get Account Data",
         "operationId": "GetAccountData",
