@@ -1,0 +1,91 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Consolidated Support CRM  API",
+    "description": "Consolidated Support CRM  API",
+    "version": "2.0.0"
+  },
+  "host": "esfa-cs-dev.api.crm4.dynamics.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "paths": {
+    "/api/data/v9.1/accounts": {
+      "get": {
+        "description": "Get Account Data",
+        "operationId": "GetAccountData",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "produces": [
+          "application/hal+json",
+          "text/plain"
+        ],
+        "consumes": [
+          "text/plain"
+        ]
+      }
+    }
+    ,
+    "/api/data/v9.1/contacts": {
+      "get": {
+        "description": "Get Contact Data",
+        "operationId": "GetContactData",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "produces": [
+          "application/hal+json",
+          "text/plain"
+        ],
+        "consumes": [
+          "text/plain"
+        ]
+      }
+    }    
+  }
+}
