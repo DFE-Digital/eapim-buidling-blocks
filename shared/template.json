@@ -2,40 +2,13 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "coreResourceGroupName": {
+      "type": "string"
+    },
     "vNetname": {
       "type": "string"
     },
-    "vNetaddressPrefix": {
-      "type": "string"
-    },
     "shared_ag_subnetName": {
-      "type": "string"
-    },
-    "shared_ag_subnetAddressPrefix": {
-      "type": "string"
-    },
-    "custeng_subnetName": {
-      "type": "string"
-    },
-    "custeng_subnetAddressPrefix": {
-      "type": "string"
-    },
-    "dc_subnetName": {
-      "type": "string"
-    },
-    "dc_subnetAddressPrefix": {
-      "type": "string"
-    },
-    "ops_subnetName": {
-      "type": "string"
-    },
-    "ops_subnetAddressPrefix": {
-      "type": "string"
-    },
-    "busen_subnetName": {
-      "type": "string"
-    },
-    "busen_subnetAddressPrefix": {
       "type": "string"
     },
     "enableDdosProtection": {
@@ -70,83 +43,7 @@
   },
   "variables": {},
   "resources": [
-    {
-      "apiVersion": "2017-05-10",
-      "name": "vnet",
-      "type": "Microsoft.Resources/deployments",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/shared/deployments/vnet.json",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "vNetname": {
-            "value": "[parameters('vNetname')]"
-          },
-          "vNetaddressPrefix": {
-            "value": "[parameters('vNetaddressPrefix')]"
-          },
-          "shared_ag_subnetName": {
-            "value": "[parameters('shared_ag_subnetName')]"
-          },
-          "shared_ag_subnetAddressPrefix": {
-            "value": "[parameters('shared_ag_subnetAddressPrefix')]"
-          },
-          "busen_subnetName": {
-            "value": "[parameters('busen_subnetName')]"
-          },
-          "busen_subnetAddressPrefix": {
-            "value": "[parameters('busen_subnetAddressPrefix')]"
-          },
-          "custeng_subnetName": {
-            "value": "[parameters('custeng_subnetName')]"
-          },
-          "custeng_subnetAddressPrefix": {
-            "value": "[parameters('custeng_subnetAddressPrefix')]"
-          },
-          "dc_subnetName": {
-            "value": "[parameters('dc_subnetName')]"
-          },
-          "dc_subnetAddressPrefix": {
-            "value": "[parameters('dc_subnetAddressPrefix')]"
-          },
-          "ops_subnetName": {
-            "value": "[parameters('ops_subnetName')]"
-          },
-          "ops_subnetAddressPrefix": {
-            "value": "[parameters('ops_subnetAddressPrefix')]"
-          },
-          "enableDdosProtection": {
-            "value": "[parameters('enableDdosProtection')]"
-          }
-        }
-      }
-    },
-    {
-      "apiVersion": "2017-05-10",
-      "name": "keyvault",
-      "type": "Microsoft.Resources/deployments",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/shared/deployments/key-vault.json",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "keyVaultName": {
-            "value": "[parameters('keyVaultName')]"
-          },
-          "keyVault_sku": {
-            "value": "[parameters('keyVault_sku')]"
-          },
-          "AccessPolicyObjectId": {
-            "value": "[parameters('AccessPolicyObjectId')]"
-          }
-        }
-      }
-    },
-    {
+   {
       "apiVersion": "2017-05-10",
       "name": "app-gateway-public-ip",
       "type": "Microsoft.Resources/deployments",
@@ -200,7 +97,7 @@
             "value": "[parameters('keyVaultName')]"
           },
           "subnetResourceId": {
-            "value": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetname'), parameters('shared_ag_subnetName'))]"
+            "value": "[resourceId(parameters('coreResourceGroupName'),'Microsoft.Network/virtualNetworks/subnets', parameters('vNetname'), parameters('shared_ag_subnetName'))]"
           },
           "appGatewaypublicIpAddressName": {
             "value": "[parameters('publicIpAddressName')]"
