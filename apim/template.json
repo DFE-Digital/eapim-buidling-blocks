@@ -281,7 +281,7 @@
         },
         "parameters": {
           "appInsightsName": {
-            "value": "[parameters('apiManagementServiceName')]"
+            "value": "[parameters('applicationGatewayAppInsightsName')]"
           }
         }
       },
