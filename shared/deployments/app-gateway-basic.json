@@ -30,6 +30,16 @@
           "subnetResourceId": {
             "type": "string"
         }
+        ,
+        "logAnalyticsSubscriptionId": {
+          "type": "string"
+        },
+        "logAnalyticsResourceGroupName": {
+          "type": "string"
+        },
+        "logAnalyticsWorkspaceName": {
+          "type": "string"
+        }         
     },
     "variables": {
            "applicationGatewayID": "[resourceId('Microsoft.Network/applicationGateways', parameters('applicationGatewayName'))]",
@@ -39,7 +49,11 @@
                   
             "appGatewayPublicIPResourceId": {
              "value": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('appGatewaypublicIpAddressName'))]"
-            }
+            },
+            "logAnalyticsResourceId": {
+              "value": "[resourceId(parameters('logAnalyticsSubscriptionId'),parameters('logAnalyticsResourceGroupName'), 'Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsWorkspaceName'))]"
+             }
+ 
     },
     "resources": [
        
@@ -135,6 +149,38 @@
                 "ruleSetVersion": "3.0"
             }
         }
+        ,
+        "resources": [
+          {
+            "type": "providers/diagnosticSettings",
+            "name": "[concat(parameters('applicationGatewayName'), '-logs'))]",
+            "apiVersion": "2017-05-01-preview",
+            "properties": {
+              "name": "[concat(parameters('applicationGatewayName'), '-logs'))]",
+              "workspaceId": "[variables('logAnalyticsResourceId')]",
+              "logs": [ 
+                {
+                  "category": "/* log category name */",
+                  "enabled": true,
+                  "retentionPolicy": {
+                    "days": 300,
+                    "enabled": true
+                  }
+                }
+              ],
+              "metrics": [
+                {
+                  "category": "AllMetrics",
+                  "enabled": true,
+                  "retentionPolicy": {
+                    "enabled": true,
+                    "days": 300
+                  }
+                }
+              ]
+            }
+          }
+        ]        
     }
        
         
