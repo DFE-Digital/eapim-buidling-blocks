@@ -30,16 +30,6 @@
           "subnetResourceId": {
             "type": "string"
         }
-        ,
-        "logAnalyticsSubscriptionId": {
-          "type": "string"
-        },
-        "logAnalyticsResourceGroupName": {
-          "type": "string"
-        },
-        "logAnalyticsWorkspaceName": {
-          "type": "string"
-        }         
     },
     "variables": {
            "applicationGatewayID": "[resourceId('Microsoft.Network/applicationGateways', parameters('applicationGatewayName'))]",
@@ -149,31 +139,6 @@
                 "ruleSetVersion": "3.0"
             }
         }
-        ,
-        "resources": [
-          {
-            "type": "providers/diagnosticSettings",
-            "name": "[concat('Microsoft.Insights/', concat(parameters('applicationGatewayName'),'-logs'))]",
-            "dependsOn": [
-              "[resourceId('Microsoft.Network/applicationGateways', parameters('applicationGatewayName'))]"
-            ],            
-            "apiVersion": "2017-05-01-preview",
-            "properties": {
-              "name": "[concat(parameters('applicationGatewayName'),'-logs')]",
-              "workspaceId": "[variables('logAnalyticsResourceId')]",
-               "metrics": [
-                {
-                  "category": "AllMetrics",
-                  "enabled": true,
-                  "retentionPolicy": {
-                    "enabled": true,
-                    "days": 300
-                  }
-                }
-              ]
-            }
-          }
-        ]        
     }
        
         

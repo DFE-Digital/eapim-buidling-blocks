@@ -32,15 +32,6 @@
     "AccessPolicyObjectId": {
       "type": "string"
     },
-    "logAnalyticsSubscriptionId": {
-      "type": "string"
-    },
-    "logAnalyticsResourceGroupName": {
-      "type": "string"
-    },
-    "logAnalyticsWorkspaceName": {
-      "type": "string"
-    },
     "trafficManagerProfileName": {
       "type": "string"
     },
@@ -109,15 +100,6 @@
           },
           "appGatewaypublicIpAddressName": {
             "value": "[parameters('publicIpAddressName')]"
-          },
-          "logAnalyticsSubscriptionId": {
-            "value": "[parameters('logAnalyticsSubscriptionId')]"
-          },
-          "logAnalyticsResourceGroupName": {
-            "value": "[parameters('logAnalyticsResourceGroupName')]"
-          },
-          "logAnalyticsWorkspaceName": {
-            "value": "[parameters('logAnalyticsWorkspaceName')]"
           }
         }
       },
