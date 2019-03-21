@@ -39,12 +39,8 @@
                   
             "appGatewayPublicIPResourceId": {
              "value": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('appGatewaypublicIpAddressName'))]"
-            },
-            "logAnalyticsResourceId": {
-              "value": "[resourceId(parameters('logAnalyticsSubscriptionId'),parameters('logAnalyticsResourceGroupName'), 'Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsWorkspaceName'))]"
-             }
- 
-    },
+            }
+     },
     "resources": [
        
       {
