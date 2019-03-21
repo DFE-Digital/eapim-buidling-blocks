@@ -153,7 +153,7 @@
         "resources": [
           {
             "type": "providers/diagnosticSettings",
-            "name": "[concat(parameters('applicationGatewayName'),'-logs')]",
+            "name": "[concat('Microsoft.Insights/', concat(parameters('applicationGatewayName'),'-logs'))]",
             "dependsOn": [
               "[resourceId('Microsoft.Network/applicationGateways', parameters('applicationGatewayName'))]"
             ],            
