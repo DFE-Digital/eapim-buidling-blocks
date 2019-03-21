@@ -163,7 +163,23 @@
               "workspaceId": "[variables('logAnalyticsResourceId')]",
               "logs": [ 
                 {
-                  "category": "/* log category name */",
+                  "category": "ApplicationGatewayAccessLog",
+                  "enabled": true,
+                  "retentionPolicy": {
+                    "days": 300,
+                    "enabled": true
+                  }
+                },
+                {
+                  "category": "ApplicationGatewayPerformanceLog",
+                  "enabled": true,
+                  "retentionPolicy": {
+                    "days": 300,
+                    "enabled": true
+                  }
+                },
+                {
+                  "category": "ApplicationGatewayFirewallLog",
                   "enabled": true,
                   "retentionPolicy": {
                     "days": 300,
