@@ -169,22 +169,6 @@
                     "days": 300,
                     "enabled": true
                   }
-                },
-                {
-                  "category": "ApplicationGatewayPerformanceLog",
-                  "enabled": true,
-                  "retentionPolicy": {
-                    "days": 300,
-                    "enabled": true
-                  }
-                },
-                {
-                  "category": "ApplicationGatewayFirewallLog",
-                  "enabled": true,
-                  "retentionPolicy": {
-                    "days": 300,
-                    "enabled": true
-                  }
                 }
               ],
               "metrics": [
