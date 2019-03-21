@@ -152,7 +152,7 @@
         ,
         "resources": [
           {
-            "type": "providers/diagnosticSettings",
+            "type": "diagnosticSettings",
             "name": "[concat(parameters('applicationGatewayName'),'-logs')]",
             "dependsOn": [
               "[parameters('applicationGatewayName')]"
