@@ -155,7 +155,7 @@
             "type": "providers/diagnosticSettings",
             "name": "[concat(parameters('applicationGatewayName'),'-logs')]",
             "dependsOn": [
-              "[variables('logAnalyticsResourceId')]"
+              "[parameters('applicationGatewayName')]"
             ],            
             "apiVersion": "2017-05-01-preview",
             "properties": {
