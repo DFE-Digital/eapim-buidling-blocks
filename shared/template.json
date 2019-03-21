@@ -40,7 +40,7 @@
     },
     "logAnalyticsWorkspaceName": {
       "type": "string"
-    }, 
+    },
     "trafficManagerProfileName": {
       "type": "string"
     },
@@ -51,7 +51,7 @@
   },
   "variables": {},
   "resources": [
-   {
+    {
       "apiVersion": "2017-05-10",
       "name": "app-gateway-public-ip",
       "type": "Microsoft.Resources/deployments",
@@ -109,8 +109,7 @@
           },
           "appGatewaypublicIpAddressName": {
             "value": "[parameters('publicIpAddressName')]"
-          }
-          ,
+          },
           "logAnalyticsSubscriptionId": {
             "value": "[parameters('logAnalyticsSubscriptionId')]"
           },
