@@ -152,7 +152,7 @@
         ,
         "resources": [
           {
-            "type": "Microsoft.Network/applicationGateways/providers/diagnosticSettings",
+            "type": "providers/diagnosticSettings",
             "name": "[concat(parameters('applicationGatewayName'),'-logs')]",
             "dependsOn": [
               "[parameters('applicationGatewayName')]"
