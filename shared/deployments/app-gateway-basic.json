@@ -161,17 +161,7 @@
             "properties": {
               "name": "[concat(parameters('applicationGatewayName'),'-logs')]",
               "workspaceId": "[variables('logAnalyticsResourceId')]",
-              "logs": [ 
-                {
-                  "category": "ApplicationGatewayAccessLog",
-                  "enabled": true,
-                  "retentionPolicy": {
-                    "days": 300,
-                    "enabled": true
-                  }
-                }
-              ],
-              "metrics": [
+               "metrics": [
                 {
                   "category": "AllMetrics",
                   "enabled": true,
