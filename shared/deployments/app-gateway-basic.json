@@ -153,10 +153,10 @@
         "resources": [
           {
             "type": "providers/diagnosticSettings",
-            "name": "[concat(parameters('applicationGatewayName'), '-logs'))]",
+            "name": "[concat(parameters('applicationGatewayName'),'-logs'))]",
             "apiVersion": "2017-05-01-preview",
             "properties": {
-              "name": "[concat(parameters('applicationGatewayName'), '-logs'))]",
+              "name": "[concat(parameters('applicationGatewayName'),'-logs'))]",
               "workspaceId": "[variables('logAnalyticsResourceId')]",
               "logs": [ 
                 {
