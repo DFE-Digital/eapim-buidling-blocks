@@ -1,6 +1,6 @@
 {
     "Name":  "EAPIM Service Contributor Role",
-    "IsCustom":  false,
+    "IsCustom":  true,
     "Description":  "Can manage service and the APIs",
     "Actions":  [
                     "Microsoft.ApiManagement/service/*",
