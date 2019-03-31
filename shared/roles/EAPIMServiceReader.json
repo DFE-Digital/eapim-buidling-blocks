@@ -1,6 +1,6 @@
 {
     "Name":  "EAPIM Service Reader Role",
-    "IsCustom":  false,
+    "IsCustom":  true,
     "Description":  "Read-only access to service and APIs",
     "Actions":  [
                     "Microsoft.ApiManagement/service/*/read",
