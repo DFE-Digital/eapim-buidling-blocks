@@ -1,5 +1,5 @@
 {
-    "Name":  "EAPIM Service Contributor",
+    "Name":  "EAPIM Service Contributor Role",
     "Id":  "312a565d-c81f-4fd8-895a-4e21e48d571c",
     "IsCustom":  false,
     "Description":  "Can manage service and the APIs",
@@ -22,6 +22,6 @@
 
                        ],
     "AssignableScopes":  [
-                             "/"
+                             "/subscriptions/6baf9b49-a057-499a-bbe1-933ed45d37c5"
                          ]
 }
