@@ -1,7 +1,8 @@
 {
-    "Name":  "EAPIM Reader",
-    "IsCustom":  true,
-    "Description":  "Read-only access to EAPIM",
+    "Name":  "EAPIM Service Reader Role",
+    "Id":  "71522526-b88f-4d52-b57f-d31fc3546d0d",
+    "IsCustom":  false,
+    "Description":  "Read-only access to service and APIs",
     "Actions":  [
                     "Microsoft.ApiManagement/service/*/read",
                     "Microsoft.ApiManagement/service/read",
@@ -22,6 +23,6 @@
 
                        ],
     "AssignableScopes":  [
-                             "/subscriptions/6baf9b49-a057-499a-bbe1-933ed45d37c5"
+                             "/"
                          ]
 }
