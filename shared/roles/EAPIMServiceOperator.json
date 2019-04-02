@@ -20,7 +20,7 @@
                     "Microsoft.Support/*"
                 ],
     "NotActions":  [
-                       "Microsoft.ApiManagement/service/users/keys/read"
+
                    ],
     "DataActions":  [
 
