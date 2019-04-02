@@ -1,5 +1,5 @@
 {
-    "Name":  "EAPIM Service Contributor Role",
+    "Name":  "EAPIM Service Editor Role",
     "IsCustom":  true,
     "Description":  "Can manage service and the APIs",
     "Actions":  [
