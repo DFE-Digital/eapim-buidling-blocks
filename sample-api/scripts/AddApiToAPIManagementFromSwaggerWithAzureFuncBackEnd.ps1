@@ -4,7 +4,7 @@ Param(
 [string] $apiId,
 [string] $swaggerFilePath,
 [string] $productID,
-[string] $apiPath = "apis",
+[string] $apiPath,
 [string] $functionAppName,
 [string] $functionUrl ,
 [string] $functionKey, 
@@ -20,15 +20,17 @@ $ApiMgmtContext = New-AzureRmApiManagementContext -ResourceGroupName "$apiManage
 Write-verbose "$ApiMgmtContext" -verbose
 $DebugPreference="Continue"
 
+Write-Output "Context Created"
+#$BackEnd = Get-AzureRmApiManagementBackend  -Context $ApiMgmtContext -BackendId $functionAppName
+#$cred = $BackEnd.Credentials
 
-$BackEnd = Get-AzureRmApiManagementBackend  -Context $ApiMgmtContext -BackendId $functionAppName
-$cred = $BackEnd.Credentials
 
 $existingApi = Get-AzureRmApiManagementApi -Context $ApiMgmtContext -ApiId $apiId -ErrorAction Continue
 
 if (!$existingApi) {
    $credential = New-AzureRmApiManagementBackendCredential -AuthorizationHeaderParameter opensesame  -Header @{"x-functions-key" = @($functionKey)}
     New-AzureRmApiManagementBackend -Context $ApiMgmtContext -BackendId $functionAppName -Url $functionUrl -Protocol $protocol  -Credential $credential -Description $functionAppName
+    Write-Output "API BackEnd Created"
 
 }
 else
@@ -37,9 +39,11 @@ else
    Remove-AzureRmApiManagementBackend -Context $ApiMgmtContext -BackendId $functionAppName
    $credential = New-AzureRmApiManagementBackendCredential -AuthorizationHeaderScheme basic -AuthorizationHeaderParameter opensesame  -Header @{"x-functions-key" = @($functionKey)}
    New-AzureRmApiManagementBackend  -Context $ApiMgmtContext -BackendId $functionAppName -Url $functionUrl -Protocol $protocol  -Credential $credential -Description $functionAppName
+    Write-Output "API Existed. Deleted older version.. API BackEnd Created"
 
 }
 
 Import-AzureRmApiManagementApi -Context $ApiMgmtContext -SpecificationFormat "Swagger" -ApiId $apiId -SpecificationPath $swaggerFilePath -Path $apiPath
 
+  Write-Output "API Created"
 
