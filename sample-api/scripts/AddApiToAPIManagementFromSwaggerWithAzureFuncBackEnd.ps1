@@ -27,7 +27,7 @@ $cred = $BackEnd.Credentials
 $existingApi = Get-AzureRmApiManagementApi -Context $ApiMgmtContext -ApiId $apiId -ErrorAction Continue
 
 if (!$existingApi) {
-   $credential = New-AzureRmApiManagementBackendCredential -AuthorizationHeaderParameter opensesame  -Header @{"x-functions-key" = @('s113d01-rstone-fa-01-key')}
+   $credential = New-AzureRmApiManagementBackendCredential -AuthorizationHeaderParameter opensesame  -Header @{"x-functions-key" = @($functionKey)}
     New-AzureRmApiManagementBackend -Context $ApiMgmtContext -BackendId $functionAppName -Url $functionUrl -Protocol $protocol  -Credential $credential -Description $functionAppName
 
 }
