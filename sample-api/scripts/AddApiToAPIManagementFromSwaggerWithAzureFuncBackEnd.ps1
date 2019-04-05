@@ -36,5 +36,9 @@ Write-Output "API BackEnd Created. Going to import API now"
 # Import API now
 Import-AzureRmApiManagementApi -Context $ApiMgmtContext -SpecificationFormat "Swagger" -ApiId $apiId -SpecificationPath $swaggerFilePath -Path $apiPath
 
+# Add API to product
+Add-AzureRmApiManagementApiToProduct -Context $ApiMgmtContext -ProductId $productID -ApiId $apiId 
+
+
 Write-Output "API Created"
 
