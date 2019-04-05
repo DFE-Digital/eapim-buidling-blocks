@@ -24,26 +24,17 @@ Write-Output "Context Created"
 #$BackEnd = Get-AzureRmApiManagementBackend  -Context $ApiMgmtContext -BackendId $functionAppName
 #$cred = $BackEnd.Credentials
 
+# Remove Existing API and Backend Credentials
+Remove-AzureRmApiManagementApi -Context $ApiMgmtContext -ApiId $apiId -erroraction 'silentlycontinue'
+Remove-AzureRmApiManagementBackend -Context $ApiMgmtContext -BackendId $functionAppName -erroraction 'silentlycontinue'
+ 
+# Create Backend and API
+$credential = New-AzureRmApiManagementBackendCredential -AuthorizationHeaderParameter opensesame  -Header @{"x-functions-key" = @($functionKey)}
+New-AzureRmApiManagementBackend -Context $ApiMgmtContext -BackendId $functionAppName -Url $functionUrl -Protocol $protocol  -Credential $credential -Description $functionAppName
+Write-Output "API BackEnd Created. Going to import API now"
 
-$existingApi = Get-AzureRmApiManagementApi -Context $ApiMgmtContext -ApiId $apiId -ErrorAction Continue
-
-if (!$existingApi) {
-   $credential = New-AzureRmApiManagementBackendCredential -AuthorizationHeaderParameter opensesame  -Header @{"x-functions-key" = @($functionKey)}
-    New-AzureRmApiManagementBackend -Context $ApiMgmtContext -BackendId $functionAppName -Url $functionUrl -Protocol $protocol  -Credential $credential -Description $functionAppName
-    Write-Output "API BackEnd Created"
-
-}
-else
-{
-   Remove-AzureRmApiManagementApi -Context $ApiMgmtContext -ApiId $apiId -erroraction 'silentlycontinue'
-   Remove-AzureRmApiManagementBackend -Context $ApiMgmtContext -BackendId $functionAppName
-   $credential = New-AzureRmApiManagementBackendCredential -AuthorizationHeaderScheme basic -AuthorizationHeaderParameter opensesame  -Header @{"x-functions-key" = @($functionKey)}
-   New-AzureRmApiManagementBackend  -Context $ApiMgmtContext -BackendId $functionAppName -Url $functionUrl -Protocol $protocol  -Credential $credential -Description $functionAppName
-    Write-Output "API Existed. Deleted older version.. API BackEnd Created"
-
-}
-
+# Import API now
 Import-AzureRmApiManagementApi -Context $ApiMgmtContext -SpecificationFormat "Swagger" -ApiId $apiId -SpecificationPath $swaggerFilePath -Path $apiPath
 
-  Write-Output "API Created"
+Write-Output "API Created"
 
