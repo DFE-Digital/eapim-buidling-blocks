@@ -1,0 +1,37 @@
+    - To remove a policy, delete the corresponding policy statement from the policy document.
+    - Position the <base> element within a section element to inherit all policies from the corresponding section element in the enclosing scope.
+    - Remove the <base> element to prevent inheriting policies from the corresponding section element in the enclosing scope.
+    - Policies are applied in the order of their appearance, from the top down.
+    - Comments within policy elements are not supported and may disappear. Place your comments between policy elements or at a higher level scope.
+-->
+<policies>
+    <inbound>
+        <base />
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <set-header name="Entity-Id" exists-action="override">
+            <value>@{
+                string[] headerValues = null;
+                
+                context.Response.Headers.TryGetValue("odata-entityid", out headerValues);
+
+                string entityId = headerValues[0];
+
+                string[] entityIdParts = entityId.Split('(');
+
+                entityIdParts = entityIdParts[1].Split(')');
+
+                entityId = entityIdParts[0];
+
+                return entityId;
+            }</value>
+        </set-header>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
