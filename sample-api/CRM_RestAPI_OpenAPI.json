@@ -1,91 +1,93 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.1",
   "info": {
     "title": "Consolidated Support CRM  API",
     "description": "Consolidated Support CRM  API",
-    "version": "2.0.0"
+    "version": "1.0"
   },
-  "host": "esfa-cs-dev.api.crm4.dynamics.com",
-  "schemes": [
-    "https"
-  ],
-  "securityDefinitions": {
-    "apiKeyHeader": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    },
-    "apiKeyQuery": {
-      "type": "apiKey",
-      "name": "subscription-key",
-      "in": "query"
-    }
-  },
-  "security": [
+  "servers": [
     {
-      "apiKeyHeader": []
-    },
-    {
-      "apiKeyQuery": []
+      "url": "https://crmapi-customerengagement.platform.education.gov.uk/crmapi"
     }
   ],
   "paths": {
     "/api/data/v9.1/accounts": {
       "get": {
+        "summary": "GetAccountData",
         "description": "Get Account Data",
         "operationId": "GetAccountData",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
+        "requestBody": {
+          "content": {
+            "text/plain": { }
           }
         },
-        "produces": [
-          "application/hal+json",
-          "text/plain"
-        ],
-        "consumes": [
-          "text/plain"
-        ]
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": { },
+              "text/plain": { }
+            }
+          }
+        }
       }
-    }
-    ,
+    },
     "/api/data/v9.1/contacts": {
       "get": {
+        "summary": "GetContactData",
         "description": "Get Contact Data",
         "operationId": "GetContactData",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
+        "requestBody": {
+          "content": {
+            "text/plain": { }
           }
         },
-        "produces": [
-          "application/hal+json",
-          "text/plain"
-        ],
-        "consumes": [
-          "text/plain"
-        ]
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": { },
+              "text/plain": { }
+            }
+          }
+        }
       }
-    }    
-  }
+    },
+    "/api/data/v9.1/incidents": {
+      "post": {
+        "summary": "CreateIncidentData",
+        "operationId": "createincidentdata",
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "name": "Ocp-Apim-Subscription-Key",
+        "in": "header"
+      },
+      "apiKeyQuery": {
+        "type": "apiKey",
+        "name": "subscription-key",
+        "in": "query"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": [ ]
+    },
+    {
+      "apiKeyQuery": [ ]
+    }
+  ],
+  "x-ms-export-notes": [
+    "The exported API contains schemas that aren't of content type 'application/vnd.oai.openapi.components+json', and are hence not exported as OpenAPI components."
+  ]
 }
