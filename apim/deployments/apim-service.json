@@ -93,7 +93,13 @@
         "apimCertData": {
             "type": "string",
             "metadata": {
-                "description": "Certificate for the portal and proxy endpoints."
+                "description": "Certificate for the proxy endpoints."
+            }
+        },
+        "apimPortalCertData": {
+            "type": "string",
+            "metadata": {
+                "description": "Certificate for the portal endpoints."
             }
         },
         "apimCertPassword": {
@@ -125,7 +131,7 @@
                     {
                         "type": "Portal",
                         "hostName": "[parameters('developerPortalHostName')]",
-                        "encodedCertificate": "[parameters('apimCertData')]",
+                        "encodedCertificate": "[parameters('apimPortalCertData')]",
                         "certificatePassword": "[parameters('apimCertPassword')]"
                     },
                     {

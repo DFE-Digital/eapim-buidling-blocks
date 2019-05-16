@@ -71,7 +71,7 @@
     "apimCertPassword": {
       "type": "string"
     },
-    "apimAuthCertData": {
+    "apimPortalCertData": {
       "type": "string"
     }
   },
@@ -127,6 +127,9 @@
           },
           "apimCertData": {
             "value": "[parameters('apimCertData')]"
+          },
+          "apimPortalCertData": {
+            "value": "[parameters('apimPortalCertData')]"
           },
           "apimCertPassword": {
             "value": "[parameters('apimCertPassword')]"
