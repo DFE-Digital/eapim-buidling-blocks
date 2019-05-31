@@ -15,21 +15,17 @@
         "description": "Storage Account type"
       }
     },
-    "location": {
+    "storageAccountName": {
       "type": "string",
-      "defaultValue": "[resourceGroup().location]",
       "metadata": {
-        "description": "Location for all resources."
+        "description": "Storage account name"
       }
     }
-  },
-  "variables": {
-    "storageAccountName": "[concat('store', uniquestring(resourceGroup().id))]"
   },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('storageAccountName')]",
+      "name": "[parameters('storageAccountName')]",
       "location": "[parameters('location')]",
       "apiVersion": "2018-07-01",
       "sku": {
