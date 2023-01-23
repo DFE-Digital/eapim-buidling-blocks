@@ -191,7 +191,7 @@
                 },
                 "enableHttp2": false,
                 "firewallPolicy": {
-                    "id": "[resourceId('Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies', parameters('ApplicationGatewayWebApplicationFirewallPolicies'))]"
+                    "id": "[resourceId('Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies', parameters('applicationGatewayFirewallName'))]"
                 }
         }
     }   
