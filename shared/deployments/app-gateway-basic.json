@@ -91,9 +91,9 @@
         "name": "[parameters('applicationGatewayName')]",
         "apiVersion": "2018-12-01",
         "location": "[resourceGroup().location]",
-        "dependsOn": {[
+        "dependsOn": [
             "[resourceId('Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies', parameters('ApplicationGatewayWebApplicationFirewallPolicies'))]"
-        ]},
+        ],
         "zones": [
             "1",
             "3"
