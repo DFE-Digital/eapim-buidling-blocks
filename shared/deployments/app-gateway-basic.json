@@ -67,19 +67,7 @@
                 "managedRuleSets": [
                     {
                         "ruleSetType": "OWASP",
-                        "ruleSetVersion": "3.2",
-                        "ruleGroupOverrides": [
-                            {
-                                "ruleGroupName": "General",
-                                "rules": [
-                                    {
-                                        "ruleId": "200004",
-                                        "state": "Disabled",
-                                        "action": "AnomalyScoring"
-                                    }
-                                ]
-                            }
-                        ]
+                        "ruleSetVersion": "3.2"
                     }
                 ]
             }
@@ -182,18 +170,6 @@
                     "firewallMode": "Prevention",
                     "ruleSetType": "OWASP",
                     "ruleSetVersion": "3.2",
-                    "ruleGroupOverrides": [
-                        {
-                            "ruleGroupName": "General",
-                            "rules": [
-                                {
-                                    "ruleId": "200004",
-                                    "state": "Disabled",
-                                    "action": "AnomalyScoring"
-                                }
-                            ]
-                        }
-                    ],
                     "requestBodyCheck": true,
                     "maxRequestBodySizeInKb": 128,
                     "fileUploadLimitInMb": 100
