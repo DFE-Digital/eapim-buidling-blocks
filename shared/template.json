@@ -26,6 +26,9 @@
     "applicationGatewayName": {
       "type": "string"
     },
+    "applicationGatewayFirewallName": {
+      "type": "string"
+    },
     "appGatewayCapacity": {
       "type": "int"
     },
@@ -100,6 +103,9 @@
           },
           "appGatewaypublicIpAddressName": {
             "value": "[parameters('publicIpAddressName')]"
+          },
+          "applicationGatewayFirewallName" {
+            "value": "[parameters('applicationGatewayFirewallName')]"
           }
         }
       },
