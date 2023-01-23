@@ -48,9 +48,8 @@
               "value": "[resourceId('Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies', parameters('applicationGatewayFirewallName'))]" 
             }
      },
-    "resources": [
-        
-    {
+    "resources": [        
+    {        
         "type": "Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies",
         "apiVersion": "2022-05-01",
         "name": "[parameters('applicationGatewayFirewallName')]",
@@ -183,8 +182,18 @@
                     "firewallMode": "Prevention",
                     "ruleSetType": "OWASP",
                     "ruleSetVersion": "3.2",
-                    "disabledRuleGroups": [],
-                    "exclusions": [],
+                    "ruleGroupOverrides": [
+                        {
+                            "ruleGroupName": "General",
+                            "rules": [
+                                {
+                                    "ruleId": "200004",
+                                    "state": "Disabled",
+                                    "action": "AnomalyScoring"
+                                }
+                            ]
+                        }
+                    ],
                     "requestBodyCheck": true,
                     "maxRequestBodySizeInKb": 128,
                     "fileUploadLimitInMb": 100
