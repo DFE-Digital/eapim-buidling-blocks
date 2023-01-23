@@ -75,7 +75,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/shared/deployments/app-gateway-basic.json",
+          "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/feature/sandbox-environment/shared/deployments/app-gateway-basic.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
