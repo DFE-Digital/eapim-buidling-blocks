@@ -104,7 +104,7 @@
           "appGatewaypublicIpAddressName": {
             "value": "[parameters('publicIpAddressName')]"
           },
-          "applicationGatewayFirewallName" {
+          "applicationGatewayFirewallName": {
             "value": "[parameters('applicationGatewayFirewallName')]"
           }
         }
