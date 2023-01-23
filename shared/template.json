@@ -60,7 +60,7 @@
             "value": "[parameters('publicIpAddressName')]"
           },
           "publicIpAddressSku": {
-            "value": "Basic"
+            "value": "Standard"
           },
           "publicIpAddressAllocationMethod": {
             "value": "Dynamic"
