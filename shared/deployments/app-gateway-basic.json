@@ -50,9 +50,9 @@
         "location": "[resourceGroup().location]",
         "properties": {
             "sku": {
-                "name": "[parameters('applicationGatewaySku')]",
-                "tier": "WAF_v2",
-                "capacity": "[parameters('appGatewayCapacity')]"
+                    "name": "WAF_v2",
+                    "tier": "WAF_v2",
+                    "capacity": "[parameters('appGatewayCapacity')]"
             },
             "gatewayIPConfigurations": [
                 {
