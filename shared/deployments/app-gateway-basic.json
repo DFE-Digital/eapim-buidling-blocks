@@ -41,11 +41,11 @@
             },    
                   
             "appGatewayPublicIPResourceId": {
-             "value": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('applicationGatewayFirewallName'))]"
+             "value": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('appGatewaypublicIpAddressName'))]"
             },
         
             "appGatewayFirewallPolicies": {
-              "value": "[resourceId('Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies', parameters('ApplicationGatewayWebApplicationFirewallPolicies'))]" 
+              "value": "[resourceId('Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies', parameters('applicationGatewayFirewallName'))]" 
             }
      },
     "resources": [
@@ -53,7 +53,7 @@
     {
         "type": "Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies",
         "apiVersion": "2022-05-01",
-        "name": "[parameters('ApplicationGatewayWebApplicationFirewallPolicies')]",
+        "name": "[parameters('applicationGatewayFirewallName')]",
         "location": "westeurope",
         "properties": {
             "customRules": [],
@@ -92,7 +92,7 @@
         "apiVersion": "2018-12-01",
         "location": "[resourceGroup().location]",
         "dependsOn": [
-            "[resourceId('Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies', parameters('ApplicationGatewayWebApplicationFirewallPolicies'))]"
+            "[resourceId('Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies', parameters('applicationGatewayFirewallName'))]"
         ],
         "zones": [
             "1",
