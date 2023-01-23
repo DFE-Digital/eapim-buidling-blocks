@@ -63,7 +63,7 @@
             "value": "Standard"
           },
           "publicIpAddressAllocationMethod": {
-            "value": "Dynamic"
+            "value": "Static"
           }
         }
       }
