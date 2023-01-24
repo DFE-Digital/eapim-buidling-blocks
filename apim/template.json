@@ -29,9 +29,6 @@
 		"developerPortalHostName": {
 			"type": "string"
 		},
-		"developerPortal#ificateName": {
-			"type": "string"
-		},
 		"proxyHostName": {
 			"type": "string"
 		},
