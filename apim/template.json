@@ -88,7 +88,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/apim-service.json",
+          "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/feature/sandbox-environment/apim/deployments/apim-service.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
