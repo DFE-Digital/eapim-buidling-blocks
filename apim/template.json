@@ -29,15 +29,15 @@
     "developerPortalHostName": {
       "type": "string"
     },
-    "developerPortalCertificateName": {
-      "type": "string"
-    },
+//    "developerPortalCertificateName": {
+//      "type": "string"
+//    },
     "proxyHostName": {
       "type": "string"
     },
-    "proxyCertificateName": {
-      "type": "string"
-    },
+//    "proxyCertificateName": {
+//      "type": "string"
+//    },
     "sharedResourceGroupName": {
       "type": "string"
     },
@@ -64,16 +64,16 @@
     },
     "appGatewayCapacity": {
       "type": "int"
-    },
-    "apimCertData": {
-      "type": "string"
-    },
-    "apimCertPassword": {
-      "type": "string"
-    },
-    "apimPortalCertData": {
-      "type": "string"
     }
+//    "apimCertData": {
+//      "type": "string"
+//    },
+//    "apimCertPassword": {
+//      "type": "string"
+//    },
+//    "apimPortalCertData": {
+//      "type": "string"
+//    }
   },
   "variables": {
     "deployProducts": "[greater(length(parameters('apimProductConfiguration')), 0)]",
@@ -88,7 +88,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/master/apim/deployments/apim-service.json",
+          "uri": "https://raw.githubusercontent.com/DFE-Digital/eapim-infrastructure/feature/sandbox-environment/apim/deployments/apim-service.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -107,15 +107,15 @@
           "developerPortalHostName": {
             "value": "[parameters('developerPortalHostName')]"
           },
-          "developerPortalCertificateName": {
-            "value": "[parameters('developerPortalCertificateName')]"
-          },
+//          "developerPortalCertificateName": {
+//            "value": "[parameters('developerPortalCertificateName')]"
+//          },
           "proxyHostName": {
             "value": "[parameters('proxyHostName')]"
           },
-          "proxyCertificateName": {
-            "value": "[parameters('proxyCertificateName')]"
-          },
+//          "proxyCertificateName": {
+//            "value": "[parameters('proxyCertificateName')]"
+//          },
           "sharedResourceGroupName": {
             "value": "[parameters('coreResourceGroupName')]"
           },
@@ -124,17 +124,17 @@
           },
           "subnetName": {
             "value": "[parameters('apimSubnetName')]"
-          },
-          "apimCertData": {
-            "value": "[parameters('apimCertData')]"
-          },
-          "apimPortalCertData": {
-            "value": "[parameters('apimPortalCertData')]"
-          },
-          "apimCertPassword": {
-            "value": "[parameters('apimCertPassword')]"
           }
-        }
+//          "apimCertData": {
+//            "value": "[parameters('apimCertData')]"
+//          },
+//          "apimPortalCertData": {
+//            "value": "[parameters('apimPortalCertData')]"
+//          },
+//          "apimCertPassword": {
+//            "value": "[parameters('apimCertPassword')]"
+//          }
+//        }
       }
     },
     {
