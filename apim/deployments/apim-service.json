@@ -60,18 +60,18 @@
                 "description": "The name of the Key Vault."
             }
         },
-//        "developerPortalCertificateName": {
-//            "type": "string",
-//            "metadata": {
-//                "description": "The name of the developer portal certificate in Key Vault."
-//            }
-//        },
-//        "proxyCertificateName": {
-//           "type": "string",
-//            "metadata": {
-//                "description": "The name of the developer portal certificate in Key Vault."
-//            }
-//        },
+        "developerPortalCertificateName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the developer portal certificate in Key Vault."
+            }
+        },
+        "proxyCertificateName": {
+           "type": "string",
+            "metadata": {
+                "description": "The name of the developer portal certificate in Key Vault."
+            }
+        },
         "sharedResourceGroupName": {
             "type": "string",
             "metadata": {
@@ -90,28 +90,28 @@
                 "description": "The name of the apim subnet."
             }
         },
-//        "apimCertData": {
-//            "type": "string",
-//            "metadata": {
-//                "description": "Certificate for the proxy endpoints."
-//            }
-//        },
-//        "apimPortalCertData": {
-//            "type": "string",
-//            "metadata": {
-//                "description": "Certificate for the portal endpoints."
-//            }
-//        },
-//        "apimCertPassword": {
-//            "type": "string",
-//           "metadata": {
-//                "description": "The password for the portal and proxy endpoint certificate."
-//            }
-//        }
-//    },
+        "apimCertData": {
+            "type": "string",
+            "metadata": {
+                "description": "Certificate for the proxy endpoints."
+            }
+        },
+        "apimPortalCertData": {
+            "type": "string",
+            "metadata": {
+                "description": "Certificate for the portal endpoints."
+            }
+        },
+        "apimCertPassword": {
+            "type": "string",
+           "metadata": {
+                "description": "The password for the portal and proxy endpoint certificate."
+            }
+        }
+    },
     "variables": {
-//        "developerPortalCertificateKeyVaultId": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/secrets/', parameters('developerPortalCertificateName'))]",
-//        "proxyCertificateKeyVaultId": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/secrets/' ,parameters('proxyCertificateName'))]",
+        "developerPortalCertificateKeyVaultId": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/secrets/', parameters('developerPortalCertificateName'))]",
+        "proxyCertificateKeyVaultId": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/secrets/' ,parameters('proxyCertificateName'))]",
         "subnetResourceId": "[resourceId(parameters('sharedResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('sharedVirtualNetworkName'), parameters('subnetName'))]"
     },
     "resources": [
@@ -127,21 +127,21 @@
             "properties": {
                 "publisherEmail": "[parameters('publisherEmail')]",
                 "publisherName": "[parameters('publisherName')]",
-//                "hostnameConfigurations": [
-//                    {
-//                        "type": "Portal",
-//                        "hostName": "[parameters('developerPortalHostName')]",
-//                        "encodedCertificate": "[parameters('apimPortalCertData')]",
-//                        "certificatePassword": "[parameters('apimCertPassword')]"
-//                    },
-//                    {
-//                        "type": "Proxy",
-//                        "hostName": "[parameters('proxyHostName')]",
-//                        "encodedCertificate": "[parameters('apimCertData')]",
-//                        "certificatePassword": "[parameters('apimCertPassword')]",
-//                        "defaultSslBinding": true
-//                    }
-//                ],
+                "hostnameConfigurations": [
+                    {
+                        "type": "Portal",
+                        "hostName": "[parameters('developerPortalHostName')]",
+                        "encodedCertificate": "[parameters('apimPortalCertData')]",
+                        "certificatePassword": "[parameters('apimCertPassword')]"
+                    },
+                    {
+                        "type": "Proxy",
+                        "hostName": "[parameters('proxyHostName')]",
+                        "encodedCertificate": "[parameters('apimCertData')]",
+                        "certificatePassword": "[parameters('apimCertPassword')]",
+                        "defaultSslBinding": true
+                    }
+                ],
                 "virtualNetworkConfiguration": {
                     "subnetResourceId": "[variables('subnetResourceId')]"
                 },
