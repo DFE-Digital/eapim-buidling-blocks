@@ -14,13 +14,7 @@
     "enableDdosProtection": {
       "type": "bool"
     },
-    "keyVaultName": {
-      "type": "string"
-    },
     "publicIpAddressName": {
-      "type": "string"
-    },
-    "keyVault_sku": {
       "type": "string"
     },
     "applicationGatewayName": {
@@ -31,9 +25,6 @@
     },
     "appGatewayCapacity": {
       "type": "int"
-    },
-    "AccessPolicyObjectId": {
-      "type": "string"
     },
     "trafficManagerProfileName": {
       "type": "string"
@@ -94,9 +85,6 @@
           },
           "appGatewayVirtualNetworkName": {
             "value": "[parameters('vNetname')]"
-          },
-          "keyVaultName": {
-            "value": "[parameters('keyVaultName')]"
           },
           "subnetResourceId": {
             "value": "[resourceId(parameters('coreResourceGroupName'),'Microsoft.Network/virtualNetworks/subnets', parameters('vNetname'), parameters('shared_ag_subnetName'))]"
