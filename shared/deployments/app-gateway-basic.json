@@ -21,9 +21,6 @@
           "appGatewaypublicIpAddressName": {
             "type": "string"
           },
-          "KeyVaultName": {
-            "type": "string"
-          },
           "applicationGatewayFirewallName": {
             "type": "string"  
           },
